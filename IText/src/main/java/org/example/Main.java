@@ -3,8 +3,15 @@ package org.example;
 import javafx.application.Application;
 import org.example.app.IText;
 
-public class Main {
-    public static void main(String[] args) {
+/**
+ * Application Main.
+ */
+public final class Main {
+    /**
+     * Main laucher of the app.
+     * @param args
+     */
+    public static void main(final String[] args) {
         Application.launch(IText.class, args);
     }
 }

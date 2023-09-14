@@ -9,8 +9,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -21,7 +19,7 @@
         <tabs>
           <Tab closable="false" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="127.0" prefWidth="1125.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="1006.0">
                      <children>
                         <ColorPicker layoutX="14.0" layoutY="48.0" />
                         <Label layoutX="14.0" layoutY="23.0" text="Seleziona il colore per il testo" />
@@ -32,9 +30,9 @@
                         <Label layoutX="367.0" layoutY="26.0" text="Dimensione parola" />
                         <ChoiceBox layoutX="382.0" layoutY="47.0" prefHeight="26.0" prefWidth="74.0" />
                         <Separator layoutX="487.0" layoutY="21.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Button layoutX="493.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" style="-fx-font-weight: bold;" text="B" />
-                        <Button layoutX="536.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" style="-fx-font-style: italic;" text="C" />
-                        <Button layoutX="581.0" layoutY="50.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" style="-fx-text-fill: bold;" text="S" underline="true" />
+                        <Button layoutX="493.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="B" />
+                        <Button layoutX="536.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="C" />
+                        <Button layoutX="581.0" layoutY="50.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="S" underline="true" />
                         <Separator layoutX="644.0" layoutY="23.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
                         <Label layoutX="500.0" layoutY="26.0" text="Stile parola" />
                      </children>
@@ -45,12 +43,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="1015.0">
                      <children>
-                        <ImageView fitHeight="53.0" fitWidth="49.0" layoutX="47.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="" />
-                           </image>
-                        </ImageView>
-                        <Button layoutX="22.0" layoutY="67.0" mnemonicParsing="false"  text="Acquisisci testo" />
+                        <Button layoutX="22.0" layoutY="67.0" mnemonicParsing="false" text="Acquisisci testo" />
                      </children>
                   </AnchorPane>
             </content>
@@ -59,10 +52,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" layoutX="22.0" layoutY="50.0" mnemonicParsing="false"  text="Salva" />
-                        <Button fx:id="saveButton1" layoutX="74.0" layoutY="50.0" mnemonicParsing="false"  text="Apri" />
-                        <Button layoutX="125.0" layoutY="50.0" mnemonicParsing="false"  text="Nuovo..." />
-                        <Button fx:id="saveButton2" layoutX="334.0" layoutY="50.0" mnemonicParsing="false"  text="Apri impostazioni" />
+                        <Button fx:id="saveButton" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" text="Salva" />
+                        <Button fx:id="saveButton1" layoutX="74.0" layoutY="50.0" mnemonicParsing="false" text="Apri" />
+                        <Button layoutX="125.0" layoutY="50.0" mnemonicParsing="false" text="Nuovo..." />
+                        <Button fx:id="saveButton2" layoutX="334.0" layoutY="50.0" mnemonicParsing="false" text="Apri impostazioni" />
                         <Separator layoutX="222.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
                         <Separator layoutX="456.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
                         <Label layoutX="22.0" layoutY="22.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />
@@ -75,7 +68,7 @@
       </TabPane>
    </top>
    <center>
-      <TextArea fx:id="textArea" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" promptText="Inserisci il testo qui..." BorderPane.alignment="TOP_CENTER" />
+      <TextArea fx:id="textArea" prefHeight="700.0" prefWidth="800.0" promptText="Inserisci il testo qui..." BorderPane.alignment="TOP_CENTER" />
    </center>
    <left>
       <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />

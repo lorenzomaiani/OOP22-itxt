@@ -9,24 +9,27 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
-public class VisualController {
+/**
+ * Utilities class to change the context of the application, switching scene or directly the stage.
+ */
+public final class VisualController {
 
     /**
-     * static method which change the scene in a specific stage
-     * @param FXMLFileName the name of the FXML file which it wants to load
+     * static method which change the scene in a specific stage.
+     * @param fxmlFileName the name of the FXML file which it wants to load
      * @param event event passed from an interration wiht a button
      * @throws Exception can be call if the FXML file doesn't exist
      */
-    public static void changeScene(String FXMLFileName, ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(ClassLoader.getSystemResource(FXMLFileName));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+    public static void changeScene(final String fxmlFileName, final ActionEvent event) throws IOException {
+        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
+        final Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        final Scene scene = new Scene(root);
         stage.setScene(scene);
     }
 
     /**
-     * static method to load a new stage above another
-     * @param FXMLFileName the name of the FXML file to load
+     * static method to load a new stage above another.
+     * @param fxmlFileName the name of the FXML file to load
      * @param event event from a pressed button
      * @param stageTitle title of the new stage
      * @param minWidth optional param, set the minimal width of the stage
@@ -34,14 +37,14 @@ public class VisualController {
      * @throws IOException can be call if the FXML file doesn't exist
      */
 
-    public static void chageStage(String FXMLFileName, ActionEvent event, String stageTitle,
-                                  Optional<Integer> minWidth, Optional<Integer> minHeigth) throws IOException {
-        Parent root = FXMLLoader.load(ClassLoader.getSystemResource(FXMLFileName));
-        Stage newStage = new Stage();
-        Scene newScene = new Scene(root);
+    public static void chageStage(final String fxmlFileName, final ActionEvent event, final String stageTitle,
+                                  final Optional<Integer> minWidth, final Optional<Integer> minHeigth) throws IOException {
+        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
+        final Stage newStage = new Stage();
+        final Scene newScene = new Scene(root);
         newStage.setScene(newScene);
         newStage.setTitle(stageTitle);
-        if(minHeigth.isPresent() && minWidth.isPresent()){
+        if (minHeigth.isPresent() && minWidth.isPresent()) {
             newStage.setMinHeight(minHeigth.get());
             newStage.setMinWidth(minWidth.get());
         }
