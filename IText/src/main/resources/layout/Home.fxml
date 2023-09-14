@@ -67,13 +67,18 @@
         </tabs>
       </TabPane>
    </top>
-   <center>
-      <TextArea fx:id="textArea" prefHeight="700.0" prefWidth="800.0" promptText="Inserisci il testo qui..." BorderPane.alignment="TOP_CENTER" />
-   </center>
    <left>
       <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
       <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
    </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="textArea" layoutY="29.0" prefHeight="671.0" prefWidth="800.0" promptText="Inserisci il testo qui..." />
+            <Label fx:id="infoText" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="6.0" prefHeight="17.0" prefWidth="126.0" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>
