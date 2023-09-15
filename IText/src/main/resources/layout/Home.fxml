@@ -52,10 +52,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" text="Salva" />
-                        <Button fx:id="saveButton1" layoutX="74.0" layoutY="50.0" mnemonicParsing="false" text="Apri" />
-                        <Button layoutX="125.0" layoutY="50.0" mnemonicParsing="false" text="Nuovo..." />
-                        <Button fx:id="saveButton2" layoutX="334.0" layoutY="50.0" mnemonicParsing="false" text="Apri impostazioni" />
+                        <Button fx:id="saveButton" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" onAction="#startSaveDialog" text="Salva" />
+                        <Button fx:id="openButton" layoutX="74.0" layoutY="50.0" mnemonicParsing="false" onAction="#startOpenDialog" text="Apri" />
+                        <Button layoutX="125.0" layoutY="50.0" mnemonicParsing="false" onAction="#newText" text="Nuovo..." />
+                        <Button fx:id="saveButton2" layoutX="334.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadSettingStage" text="Apri impostazioni" />
                         <Separator layoutX="222.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
                         <Separator layoutX="456.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
                         <Label layoutX="22.0" layoutY="22.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />

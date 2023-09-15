@@ -9,7 +9,7 @@ import org.example.app.IText;
 public final class Main {
     /**
      * Main laucher of the app.
-     * @param args
+     * @param args argument of main
      */
     public static void main(final String[] args) {
         Application.launch(IText.class, args);

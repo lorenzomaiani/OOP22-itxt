@@ -1,7 +1,7 @@
 package org.example.view.homeView;
 
 /**
- * The handler to all the input from user
+ * The handler to all the input from user.
  */
 public interface SessionView {
     /**

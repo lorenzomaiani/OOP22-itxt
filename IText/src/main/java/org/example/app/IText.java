@@ -19,7 +19,7 @@ public final class IText extends Application {
      * the application scene can be set.
      * Applications may create other stages, if needed, but they will not be
      * primary stages.
-     * @throws Exception
+     * @throws Exception if file FXML cannot be found
      */
     @Override
     public void start(final Stage primaryStage) throws Exception {
