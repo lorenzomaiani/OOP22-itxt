@@ -13,12 +13,12 @@ import java.util.ResourceBundle;
 /**
  * Implementing the SessionView Interface.
  */
-public class SessionViewImpl implements SessionView, Initializable {
+public final class SessionViewImpl implements SessionView, Initializable {
 
     @FXML
     private BorderPane borderPane;
 
-    private enum FileChooserOption  {SAVE, OPEN};
+    private enum FileChooserOption { SAVE, OPEN }
 
 
     @Override
@@ -53,22 +53,21 @@ public class SessionViewImpl implements SessionView, Initializable {
         log("New Text");
     }
 
-    private File openFileChooser(FileChooserOption option) {
+    private File openFileChooser(final FileChooserOption option) {
         final FileChooser fileChooser = new FileChooser();
 //        if(setting.getMainDirectory().isPresent()){
 //            fileChooser.setInitialDirectory(setting.getMainDirectory());
 //        }
-        if(option == FileChooserOption.SAVE){
+        if (option == FileChooserOption.SAVE) {
             fileChooser.setTitle("Salvataggio");
-        }
-        else{
+        } else {
             fileChooser.setTitle("Apri");
         }
         return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow()) : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
 
     }
 
-    private void log(String mess){
+    private void log(final String mess) {
         System.out.println(new Date() + " " +  mess);
     }
 }

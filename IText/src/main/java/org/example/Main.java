@@ -6,7 +6,7 @@ import org.example.app.IText;
 /**
  * Application Main.
  */
-public final class Main {
+public class Main {
     /**
      * Main laucher of the app.
      * @param args argument of main

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Laucher class for the main applicaion.
+ * Launcher class for the main application.
  */
 public final class IText extends Application {
     private static final int MIN_WIDTH = 600;
