@@ -1,4 +1,4 @@
-package org.example.view.homeView;
+package org.example.view.homeview;
 
 /**
  * The handler to all the input from user.

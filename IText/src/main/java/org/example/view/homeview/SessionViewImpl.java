@@ -1,29 +1,44 @@
-package org.example.view.homeView;
+package org.example.view.homeview;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 /**
  * Implementing the SessionView Interface.
  */
 public final class SessionViewImpl implements SessionView, Initializable {
 
+    private static final int MAX_LONG = 15;
+
     @FXML
     private BorderPane borderPane;
+
+    @FXML
+    private ChoiceBox<String> fontChoiceBox;
+
+    @FXML
+    private ChoiceBox<Integer> sizeChoiceBox;
+
 
     private enum FileChooserOption { SAVE, OPEN }
 
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-
+        fontChoiceBox.getItems().addAll(Font.getFamilies());
+        sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(SessionViewImpl.MAX_LONG).toList());
+        fontChoiceBox.setOnAction(this::getFontValue);
+        sizeChoiceBox.setOnAction(this::getSizeValue);
     }
 
     @Override
@@ -34,6 +49,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @Override
     public void updateGui() {
         log("Update Gui");
+
     }
 
     @Override
@@ -71,4 +87,15 @@ public final class SessionViewImpl implements SessionView, Initializable {
     private void log(final String mess) {
         System.out.println(new Date() + " " +  mess);
     }
+
+    private String getFontValue(final ActionEvent event) {
+        log(fontChoiceBox.getValue());
+        return null;
+    }
+
+    private String getSizeValue(final ActionEvent event) {
+        log(sizeChoiceBox.getValue().toString());
+        return null;
+    }
+
 }

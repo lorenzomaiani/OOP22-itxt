@@ -8,12 +8,11 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" prefHeight="858.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.homeView.SessionViewImpl">
+<BorderPane fx:id="borderPane" prefHeight="858.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.homeview.SessionViewImpl">
    <top>
       <TabPane prefHeight="150.0" prefWidth="1125.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -23,18 +22,18 @@
                      <children>
                         <ColorPicker layoutX="14.0" layoutY="48.0" />
                         <Label layoutX="14.0" layoutY="23.0" text="Seleziona il colore per il testo" />
-                        <Label layoutX="192.0" layoutY="26.0" text="Inserire font desiderato" />
+                        <Label layoutX="192.0" layoutY="26.0" text="Selezionare il font desiderato" />
                         <Separator layoutX="176.0" layoutY="21.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <TextField layoutX="192.0" layoutY="47.0" />
-                        <Separator layoutX="353.0" layoutY="19.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Label layoutX="367.0" layoutY="26.0" text="Dimensione parola" />
-                        <ChoiceBox layoutX="382.0" layoutY="47.0" prefHeight="26.0" prefWidth="74.0" />
-                        <Separator layoutX="487.0" layoutY="21.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Button layoutX="493.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="B" />
-                        <Button layoutX="536.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="C" />
-                        <Button layoutX="581.0" layoutY="50.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="S" underline="true" />
-                        <Separator layoutX="644.0" layoutY="23.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Label layoutX="500.0" layoutY="26.0" text="Stile parola" />
+                        <Separator layoutX="367.0" layoutY="18.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Label layoutX="381.0" layoutY="25.0" text="Dimensione carattere" />
+                        <ChoiceBox fx:id="sizeChoiceBox" layoutX="381.0" layoutY="48.0" prefHeight="26.0" prefWidth="106.0" />
+                        <Separator layoutX="501.0" layoutY="20.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Button layoutX="507.0" layoutY="48.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="B" />
+                        <Button layoutX="550.0" layoutY="48.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="C" />
+                        <Button layoutX="595.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="S" underline="true" />
+                        <Separator layoutX="658.0" layoutY="22.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Label layoutX="514.0" layoutY="25.0" text="Stile parola" />
+                        <ChoiceBox fx:id="fontChoiceBox" layoutX="192.0" layoutY="49.0" prefHeight="26.0" prefWidth="165.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -76,7 +75,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="textArea" layoutY="29.0" prefHeight="671.0" prefWidth="800.0" promptText="Inserisci il testo qui..." />
+            <TextArea fx:id="textArea" layoutX="-6.0" layoutY="19.0" prefHeight="671.0" prefWidth="800.0" promptText="Inserisci il testo qui..." />
             <Label fx:id="infoText" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="6.0" prefHeight="17.0" prefWidth="126.0" />
          </children>
       </AnchorPane>
