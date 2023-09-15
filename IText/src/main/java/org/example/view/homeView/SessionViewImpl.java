@@ -63,7 +63,8 @@ public final class SessionViewImpl implements SessionView, Initializable {
         } else {
             fileChooser.setTitle("Apri");
         }
-        return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow()) : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
+        return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow())
+                : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
 
     }
 
