@@ -6,8 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
-import java.io.File;
+
+import org.example.utils.FileChooserOption;
+import org.example.utils.GraphicsUtil;
+
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -28,9 +30,6 @@ public final class SessionViewImpl implements SessionView, Initializable {
 
     @FXML
     private ChoiceBox<Integer> sizeChoiceBox;
-
-
-    private enum FileChooserOption { SAVE, OPEN }
 
 
     @Override
@@ -55,13 +54,15 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @Override
     public void startSaveDialog() {
         log("Start save dialog");
-        openFileChooser(FileChooserOption.SAVE);
+        //openFileChooser(FileChooserOption.SAVE);
+        GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
     }
 
     @Override
     public void startOpenDialog() {
         log("Start Open Dialog");
-        openFileChooser(FileChooserOption.OPEN);
+        //openFileChooser(FileChooserOption.OPEN);
+        GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
     }
 
     @Override
@@ -69,20 +70,20 @@ public final class SessionViewImpl implements SessionView, Initializable {
         log("New Text");
     }
 
-    private File openFileChooser(final FileChooserOption option) {
-        final FileChooser fileChooser = new FileChooser();
-//        if(setting.getMainDirectory().isPresent()){
-//            fileChooser.setInitialDirectory(setting.getMainDirectory());
+//    private File openFileChooser(final FileChooserOption option) {
+//        final FileChooser fileChooser = new FileChooser();
+//       if(setting.getMainDirectory().isPresent()){
+//           fileChooser.setInitialDirectory(setting.getMainDirectory());
 //        }
-        if (option == FileChooserOption.SAVE) {
-            fileChooser.setTitle("Salvataggio");
-        } else {
-            fileChooser.setTitle("Apri");
-        }
-        return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow())
-                : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
-
-    }
+//        if (option == FileChooserOption.SAVE) {
+//            fileChooser.setTitle("Salvataggio");
+//        } else {
+//            fileChooser.setTitle("Apri");
+//        }
+//        return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow())
+//                : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
+//
+//    }
 
     private void log(final String mess) {
         System.out.println(new Date() + " " +  mess);
