@@ -1,21 +1,32 @@
 package org.example.controller.session;
 
-import java.io.File;
-import java.io.IOException;
+import org.example.controller.file.OpenFileController;
+import org.example.controller.file.OpenFileControllerImpl;
+import org.example.controller.file.SaveFileController;
+import org.example.controller.file.SaveFileControllerImpl;
 
 /**
  * Implementation of the SessionController.
  */
 public class SessionControllerImpl implements SessionController {
 
+    private SaveFileController saveFileController;
+    private OpenFileController openFileController;
+
+
+
+
+
     @Override
-    public void saveFile(){
+    public void saveFile(final String text, final String filePath, final String fileName) {
+        saveFileController = new SaveFileControllerImpl(filePath, fileName);
 
     }
 
     @Override
-    public void openFile() {
-
+    public String openFile(final String filePath, final String fileName) {
+        openFileController = new OpenFileControllerImpl(filePath, fileName);
+        return null;
     }
 
     @Override

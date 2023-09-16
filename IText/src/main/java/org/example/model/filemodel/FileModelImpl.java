@@ -3,12 +3,15 @@ package org.example.model.filemodel;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * FileModel implementation class.
+ */
 public class FileModelImpl implements FileModel {
     private String path;
     private String name;
     private Date creationDate;
 
-    public FileModelImpl(String path, String name){
+    public FileModelImpl(final String path, final String name) {
         this.path = path;
         this.name = name;
         this.creationDate = new Date();
@@ -16,12 +19,12 @@ public class FileModelImpl implements FileModel {
 
 
     @Override
-    public void setFilePath(String path) {
+    public void setFilePath(final String path) {
         this.path = path;
     }
 
     @Override
-    public void setFileName(String name) {
+    public void setFileName(final String name) {
         this.name = name;
     }
 
@@ -41,7 +44,7 @@ public class FileModelImpl implements FileModel {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FileModelImpl fileModel = (FileModelImpl) o;
