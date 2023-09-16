@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 /**
  * Launcher class for the main application.
@@ -27,6 +30,7 @@ public final class IText extends Application {
         final Scene scene = new Scene(root);
         primaryStage.setMinWidth(IText.MIN_WIDTH);
         primaryStage.setMinHeight(IText.MIN_HEIGHT);
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/IText_icon.png"))));
         primaryStage.setTitle("IText");
         primaryStage.setScene(scene);
         primaryStage.show();
