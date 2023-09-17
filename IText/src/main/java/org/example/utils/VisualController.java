@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
@@ -37,17 +38,16 @@ public final class VisualController {
      * @throws IOException can be call if the FXML file doesn't exist
      */
 
-    public static void chageStage(final String fxmlFileName, final ActionEvent event, final String stageTitle,
-                                  final Optional<Integer> minWidth, final Optional<Integer> minHeigth) throws IOException {
+    public static void chageStage(final String fxmlFileName, final ActionEvent event, final String stageTitle, final Image iconImage,
+                                  final Optional<Double> minWidth, final Optional<Double> minHeigth) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
         final Stage newStage = new Stage();
         final Scene newScene = new Scene(root);
         newStage.setScene(newScene);
         newStage.setTitle(stageTitle);
-        if (minHeigth.isPresent() && minWidth.isPresent()) {
-            newStage.setMinHeight(minHeigth.get());
-            newStage.setMinWidth(minWidth.get());
-        }
+        newStage.getIcons().add(iconImage);
+        minHeigth.ifPresent(x -> newStage.setMinWidth(minHeigth.get()));
+        minWidth.ifPresent(x -> newStage.setMinWidth(minWidth.get()));
         newStage.show();
     }
 }
