@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -31,8 +30,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="41.0" layoutY="84.0" prefHeight="25.0" prefWidth="341.0" />
-            <Button layoutX="397.0" layoutY="84.0" mnemonicParsing="false" text="Sfoglia..." />
+            <TextField layoutX="25.0" layoutY="84.0" prefHeight="25.0" prefWidth="341.0" />
+            <Button layoutX="374.0" layoutY="84.0" mnemonicParsing="false" text="Sfoglia..." />
             <Label layoutX="25.0" layoutY="155.0" text="Selezionare il font principale:">
                <font>
                   <Font size="14.0" />
