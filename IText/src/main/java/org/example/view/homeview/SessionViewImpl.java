@@ -4,15 +4,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
+import org.example.controller.session.SessionController;
+import org.example.controller.session.SessionControllerImpl;
 import org.example.utils.FileChooserOption;
 import org.example.utils.GraphicsUtil;
+import org.example.utils.VisualController;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -31,6 +38,11 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @FXML
     private ChoiceBox<Integer> sizeChoiceBox;
 
+    @FXML
+    private TextArea textArea;
+
+    private SessionController controller;
+
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
@@ -38,11 +50,19 @@ public final class SessionViewImpl implements SessionView, Initializable {
         sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(SessionViewImpl.MAX_LONG).toList());
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
+        controller = new SessionControllerImpl();
     }
 
     @Override
-    public void loadSettingStage() {
+    public void loadSettingStage(ActionEvent event){
         log("Load setting");
+        try{
+            VisualController.chageStage("layout/Setting.fxml", event, "Setting", new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
+                    Optional.of(600.0), Optional.of(400.0));
+        } catch (IOException e){
+            System.err.print("File not found, pls enter a valid file before");
+        }
+
     }
 
     @Override
@@ -55,14 +75,21 @@ public final class SessionViewImpl implements SessionView, Initializable {
     public void startSaveDialog() {
         log("Start save dialog");
         //openFileChooser(FileChooserOption.SAVE);
-        GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
+        File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
+        if(sf != null){
+            controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
+        }
+
     }
 
     @Override
     public void startOpenDialog() {
         log("Start Open Dialog");
         //openFileChooser(FileChooserOption.OPEN);
-        GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
+        File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
+        if(of != null){
+            textArea.setText(controller.openFile(of.getPath(), of.getName()));
+        }
     }
 
     @Override
@@ -91,12 +118,12 @@ public final class SessionViewImpl implements SessionView, Initializable {
 
     private String getFontValue(final ActionEvent event) {
         log(fontChoiceBox.getValue());
-        return null;
+        return fontChoiceBox.getValue();
     }
 
     private String getSizeValue(final ActionEvent event) {
         log(sizeChoiceBox.getValue().toString());
-        return null;
+        return sizeChoiceBox.getValue().toString();
     }
 
 }

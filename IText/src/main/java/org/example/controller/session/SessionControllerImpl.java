@@ -14,19 +14,38 @@ public class SessionControllerImpl implements SessionController {
     private OpenFileController openFileController;
 
 
-
-
-
     @Override
     public void saveFile(final String text, final String filePath, final String fileName) {
         saveFileController = new SaveFileControllerImpl(filePath, fileName);
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                if (!saveFileController.isAlreadyExist()) {
+                    saveFileController.createAFile();
+                }
+                saveFileController.writeOnFile(text);
+
+            }
+        }.start();
 
     }
 
     @Override
     public String openFile(final String filePath, final String fileName) {
         openFileController = new OpenFileControllerImpl(filePath, fileName);
-        return null;
+        final String[] readedText = {""};
+        /*new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                if (openFileController.isAnExistingFile()) {
+                    readedText[0] = openFileController.readFromFile();
+                }
+            }
+        }.start();*/
+        return openFileController.isAnExistingFile() ? openFileController.readFromFile() : null;
+
     }
 
     @Override
