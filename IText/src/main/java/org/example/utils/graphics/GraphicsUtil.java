@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.utils.graphics;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;

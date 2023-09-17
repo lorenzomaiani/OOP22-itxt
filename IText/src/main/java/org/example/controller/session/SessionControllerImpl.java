@@ -8,7 +8,7 @@ import org.example.controller.file.SaveFileControllerImpl;
 /**
  * Implementation of the SessionController.
  */
-public class SessionControllerImpl implements SessionController {
+public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
     private OpenFileController openFileController;

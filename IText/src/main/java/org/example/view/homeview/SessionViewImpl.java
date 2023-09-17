@@ -5,21 +5,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
-import org.example.utils.FileChooserOption;
-import org.example.utils.GraphicsUtil;
+import org.example.utils.constant.Constants;
+import org.example.utils.graphics.FileChooserOption;
+import org.example.utils.graphics.GraphicsUtil;
 import org.example.utils.VisualController;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 /**
@@ -54,12 +57,13 @@ public final class SessionViewImpl implements SessionView, Initializable {
     }
 
     @Override
-    public void loadSettingStage(ActionEvent event){
+    public void loadSettingStage() {
         log("Load setting");
-        try{
-            VisualController.chageStage("layout/Setting.fxml", event, "Setting", new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
-                    Optional.of(600.0), Optional.of(400.0));
-        } catch (IOException e){
+        try {
+            VisualController.chageStage("layout/Setting.fxml", "Setting",
+                    new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
+                    Optional.of(Constants.MIN_STAGE_WIDTH), Optional.of(Constants.MIN_STAGE_HEIGHT));
+        } catch (IOException e) {
             System.err.print("File not found, pls enter a valid file before");
         }
 
@@ -76,7 +80,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
         log("Start save dialog");
         //openFileChooser(FileChooserOption.SAVE);
         File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
-        if(sf != null){
+        if (sf != null) {
             controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
         }
 
@@ -87,7 +91,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
         log("Start Open Dialog");
         //openFileChooser(FileChooserOption.OPEN);
         File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
-        if(of != null){
+        if (of != null) {
             textArea.setText(controller.openFile(of.getPath(), of.getName()));
         }
     }

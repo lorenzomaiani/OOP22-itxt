@@ -31,15 +31,16 @@ public final class VisualController {
     /**
      * static method to load a new stage above another.
      * @param fxmlFileName the name of the FXML file to load
-     * @param event event from a pressed button
      * @param stageTitle title of the new stage
+     * @param iconImage the icon to set to the new stage
      * @param minWidth optional param, set the minimal width of the stage
      * @param minHeigth optional param, set the minimal height of the stage
      * @throws IOException can be call if the FXML file doesn't exist
      */
 
-    public static void chageStage(final String fxmlFileName, final ActionEvent event, final String stageTitle, final Image iconImage,
-                                  final Optional<Double> minWidth, final Optional<Double> minHeigth) throws IOException {
+    public static void chageStage(final String fxmlFileName, final String stageTitle,
+                                  final Image iconImage, final Optional<Double> minWidth,
+                                  final Optional<Double> minHeigth) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
         final Stage newStage = new Stage();
         final Scene newScene = new Scene(root);

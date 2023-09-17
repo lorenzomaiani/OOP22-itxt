@@ -1,7 +1,5 @@
 package org.example.view.homeview;
 
-import javafx.event.ActionEvent;
-
 /**
  * The handler to all the input from user.
  */
@@ -9,7 +7,7 @@ public interface SessionView {
     /**
      * loading the setting stage calling the visualController.
      */
-    void loadSettingStage(ActionEvent event);
+    void loadSettingStage();
 
     /**
      * refresh the SessionGui if something is changed.

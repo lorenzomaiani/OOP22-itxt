@@ -6,11 +6,16 @@ import java.util.Objects;
 /**
  * FileModel implementation class.
  */
-public class FileModelImpl implements FileModel {
+public final class FileModelImpl implements FileModel {
     private String path;
     private String name;
     private Date creationDate;
 
+    /**
+     * Constructor.
+     * @param path the path of the file
+     * @param name the name of the file
+     */
     public FileModelImpl(final String path, final String name) {
         this.path = path;
         this.name = name;

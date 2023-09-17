@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.utils.graphics;
 
 /**
  * Different type of file chooser, one to save and other to open file.
