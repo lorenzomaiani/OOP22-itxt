@@ -8,7 +8,7 @@ import org.example.app.IText;
  */
 public class Main {
     /**
-     * Main laucher of the app.
+     * Main launcher of the app.
      * @param args argument of main
      */
     public static void main(final String[] args) {
