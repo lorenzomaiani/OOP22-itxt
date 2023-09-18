@@ -33,32 +33,24 @@ public final class SessionControllerImpl implements SessionController {
     @Override
     public String openFile(final String filePath, final String fileName) {
         OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
-        final String[] readedText = {""};
-        /*new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                if (openFileController.isAnExistingFile()) {
-                    readedText[0] = openFileController.readFromFile();
-                }
-            }
-        }.start();*/
-        return openFileController.isAnExistingFile() ? openFileController.getTextFromText() : null;
+        return openFileController.isAnExistingFile() ? openFileController.getTextFromText() : "";
 
     }
 
     @Override
     public void restoreFileInfo() {
-
+        // infoFile.reset();
     }
 
     @Override
     public String getFileInfo() {
+        // return infoFile.getName;
         return null;
     }
 
     @Override
     public boolean isFileInfoSetted() {
+        // return infoFile != null;
         return false;
     }
 }
