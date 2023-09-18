@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.settingView.SettingViewImpl">
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,14 +30,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="25.0" layoutY="84.0" prefHeight="25.0" prefWidth="341.0" />
-            <Button layoutX="374.0" layoutY="84.0" mnemonicParsing="false" text="Sfoglia..." />
+            <TextField fx:id="mainDirectoryTextField" layoutX="25.0" layoutY="84.0" onAction="#getMainDirectoryInput" prefHeight="25.0" prefWidth="341.0" />
+            <Button layoutX="374.0" layoutY="84.0" mnemonicParsing="false" onAction="#searchIntoFileSystem" text="Sfoglia..." />
             <Label layoutX="25.0" layoutY="155.0" text="Selezionare il font principale:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="216.0" layoutY="152.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="fontChoiceBox" layoutX="216.0" layoutY="152.0" prefWidth="150.0" />
             <Separator layoutX="17.0" layoutY="124.0" prefHeight="3.0" prefWidth="548.0" />
             <Separator layoutX="27.0" layoutY="204.0" prefHeight="3.0" prefWidth="547.0" />
             <Label layoutX="25.0" layoutY="245.0" text="Selezionare il tema dell'applicazione:">
@@ -45,8 +45,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <CheckBox layoutX="343.0" layoutY="247.0" mnemonicParsing="false" text="Dark" />
-            <CheckBox layoutX="267.0" layoutY="247.0" mnemonicParsing="false" selected="true" text="Light" />
+            <CheckBox fx:id="darkCheckBox" layoutX="343.0" layoutY="247.0" mnemonicParsing="false" onAction="#setThemeToDark" text="Dark" />
+            <CheckBox fx:id="lightCheckBox" layoutX="267.0" layoutY="247.0" mnemonicParsing="false" onAction="#setThemeToLight" selected="true" text="Light" />
          </children>
       </AnchorPane>
    </center>

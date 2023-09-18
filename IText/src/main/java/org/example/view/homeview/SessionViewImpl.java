@@ -120,14 +120,12 @@ public final class SessionViewImpl implements SessionView, Initializable {
         System.out.println(new Date() + " " +  mess);
     }
 
-    private String getFontValue(final ActionEvent event) {
+    private void getFontValue(final ActionEvent event) {
         log(fontChoiceBox.getValue());
-        return fontChoiceBox.getValue();
     }
 
-    private String getSizeValue(final ActionEvent event) {
+    private void getSizeValue(final ActionEvent event) {
         log(sizeChoiceBox.getValue().toString());
-        return sizeChoiceBox.getValue().toString();
     }
 
 }
