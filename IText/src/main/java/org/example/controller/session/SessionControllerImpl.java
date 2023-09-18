@@ -24,7 +24,7 @@ public final class SessionControllerImpl implements SessionController {
                 if (!saveFileController.isAlreadyExist()) {
                     saveFileController.createAFile();
                 }
-                saveFileController.writeOnFile(text);
+                saveFileController.saveOnFile(text);
 
             }
         }.start();
@@ -44,7 +44,7 @@ public final class SessionControllerImpl implements SessionController {
                 }
             }
         }.start();*/
-        return openFileController.isAnExistingFile() ? openFileController.readFromFile() : null;
+        return openFileController.isAnExistingFile() ? openFileController.getTextFromText() : null;
 
     }
 
