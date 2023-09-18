@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +45,9 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @FXML
     private TextArea textArea;
 
+    @FXML
+    private Label infoFile;
+
     private SessionController controller;
 
 
@@ -82,6 +86,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
         File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
         if (sf != null) {
             controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
+            infoFile.setText("Salvato in : " + controller.getFileInfo());
         }
 
     }

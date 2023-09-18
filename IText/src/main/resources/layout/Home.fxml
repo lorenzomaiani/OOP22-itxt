@@ -73,11 +73,13 @@
       <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextArea fx:id="textArea" layoutX="-6.0" layoutY="19.0" prefHeight="671.0" prefWidth="800.0" promptText="Inserisci il testo qui..." />
-            <Label fx:id="infoText" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="6.0" prefHeight="17.0" prefWidth="126.0" />
-         </children>
-      </AnchorPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <TextArea fx:id="textArea" minWidth="-Infinity" promptText="Inserisci il testo qui..." BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <Label fx:id="infoFile" prefHeight="25.0" prefWidth="89.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
    </center>
 </BorderPane>

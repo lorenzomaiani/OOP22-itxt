@@ -11,7 +11,6 @@ import org.example.controller.file.SaveFileControllerImpl;
 public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
-    private OpenFileController openFileController;
 
 
     @Override
@@ -33,7 +32,7 @@ public final class SessionControllerImpl implements SessionController {
 
     @Override
     public String openFile(final String filePath, final String fileName) {
-        openFileController = new OpenFileControllerImpl(filePath, fileName);
+        OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         final String[] readedText = {""};
         /*new Thread() {
             @Override

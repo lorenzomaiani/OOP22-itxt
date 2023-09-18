@@ -11,5 +11,9 @@ public enum FileChooserOption {
     /**
      * OPEN option.
      */
-    OPEN;
+    OPEN,
+    /**
+     * DIRECTORY type, if the file chooser has to return a directory and not a file.
+     */
+    DIRECTORY;
 }

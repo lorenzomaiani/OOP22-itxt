@@ -60,7 +60,10 @@ public final class  SettingViewImpl implements SettingView, Initializable {
 
     @Override
     public void searchIntoFileSystem() {
-        File f = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Sfoglia", borderPane.getScene().getWindow());
+        File f = GraphicsUtil.openFileChooser(FileChooserOption.DIRECTORY, "Sfoglia", borderPane.getScene().getWindow());
+        if (f.isDirectory()) {
+            mainDirectoryTextField.setText(f.getAbsolutePath());
+        }
     }
 
     private void getFontFromChoiceBox(final ActionEvent event) {
@@ -70,6 +73,4 @@ public final class  SettingViewImpl implements SettingView, Initializable {
     private void log(final String msg) {
         System.out.println(msg);
     }
-
-
 }

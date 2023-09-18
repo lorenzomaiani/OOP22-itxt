@@ -1,5 +1,6 @@
 package org.example.utils.graphics;
 
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -18,8 +19,10 @@ public class GraphicsUtil {
      * @return the file selected from the user.
      */
     public static File openFileChooser(final FileChooserOption option, final String title, final Window window) {
-        return option == FileChooserOption.SAVE ? new FileChooser().showSaveDialog(window)
-                : new FileChooser().showOpenDialog(window);
-
+        return switch (option) {
+            case SAVE -> new FileChooser().showSaveDialog(window);
+            case OPEN -> new FileChooser().showOpenDialog(window);
+            case DIRECTORY -> new DirectoryChooser().showDialog(window);
+        };
     }
 }
