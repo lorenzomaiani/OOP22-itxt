@@ -5,44 +5,60 @@ import java.util.Objects;
 /**
  * Setting implementation, uses singleton pattern.
  */
-public class SettingImpl implements Setting {
+public final class SettingImpl implements Setting {
     private static final SettingImpl SETTING = new SettingImpl();
     private String mainDirectory;
     private String mainFont;
     private Theme appTheme;
 
-    private SettingImpl(){};
-
-    public static SettingImpl getInstance(){
-        return SETTING;
+    /**
+     * Private construct matching singleton pattern.
+     */
+    private SettingImpl() {
+        this.appTheme = Theme.LIGHT;
+        this.mainDirectory = "";
+        this.mainFont = "";
     }
 
+    /**
+     * Methods to get the instance of singleton.
+     * @return the singleton object
+     */
+    public static SettingImpl getInstance() {
+        return SETTING;
+    }
+    @Override
     public String getMainDirectory() {
         return mainDirectory;
     }
 
-    public void setMainDirectory(String mainDirectory) {
+    @Override
+    public void setMainDirectory(final String mainDirectory) {
         this.mainDirectory = mainDirectory;
     }
 
+    @Override
     public String getMainFont() {
         return mainFont;
     }
 
-    public void setMainFont(String mainFont) {
+    @Override
+    public void setMainFont(final String mainFont) {
         this.mainFont = mainFont;
     }
 
+    @Override
     public Theme getAppTheme() {
         return appTheme;
     }
 
-    public void setAppTheme(Theme appTheme) {
+    @Override
+    public void setAppTheme(final Theme appTheme) {
         this.appTheme = appTheme;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

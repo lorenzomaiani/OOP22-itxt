@@ -8,6 +8,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import org.example.controller.setting.SettingController;
+import org.example.controller.setting.SettingControllerImpl;
+import org.example.model.setting.Theme;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 
@@ -35,27 +38,33 @@ public final class  SettingViewImpl implements SettingView, Initializable {
     @FXML
     private CheckBox lightCheckBox;
 
+    private SettingController controller;
+
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         fontChoiceBox.setOnAction(this::getFontFromChoiceBox);
+        controller = new SettingControllerImpl();
     }
 
     @Override
     public void getMainDirectoryInput() {
        log(mainDirectoryTextField.getText());
+       controller.setMainDirectoryInSetting(mainDirectoryTextField.getText());
     }
 
     @Override
     public void setThemeToLight() {
         log("Theme light");
         darkCheckBox.setSelected(false);
+        controller.setAppTheme(Theme.LIGHT);
     }
 
     @Override
     public void setThemeToDark() {
         log("Theme dark");
         lightCheckBox.setSelected(false);
+        controller.setAppTheme(Theme.DARK);
     }
 
     @Override
@@ -63,11 +72,13 @@ public final class  SettingViewImpl implements SettingView, Initializable {
         File f = GraphicsUtil.openFileChooser(FileChooserOption.DIRECTORY, "Sfoglia", borderPane.getScene().getWindow());
         if (f.isDirectory()) {
             mainDirectoryTextField.setText(f.getAbsolutePath());
+            controller.setMainDirectoryInSetting(mainDirectoryTextField.getText());
         }
     }
 
     private void getFontFromChoiceBox(final ActionEvent event) {
         log(fontChoiceBox.getValue());
+        controller.setFontInSetting(fontChoiceBox.getValue());
     }
 
     private void log(final String msg) {
