@@ -9,7 +9,12 @@ import java.io.File;
 /**
  * Utility class used to create single element to display.
  */
-public class GraphicsUtil {
+public final class GraphicsUtil {
+
+    private GraphicsUtil() {
+
+    }
+
 
     /**
      * Create a File Chooser.
