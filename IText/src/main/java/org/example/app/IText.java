@@ -29,7 +29,7 @@ public final class IText extends Application {
         final Scene scene = new Scene(root);
         primaryStage.setMinWidth(Constants.MIN_STAGE_WIDTH);
         primaryStage.setMinHeight(Constants.MIN_STAGE_HEIGHT);
-        primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/IText_icon.png"))));
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/itxtIcon.png"))));
         primaryStage.setTitle("IText");
         primaryStage.setScene(scene);
         primaryStage.show();
