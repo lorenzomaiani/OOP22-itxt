@@ -104,6 +104,8 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @Override
     public void newText() {
         log("New Text");
+        textArea.setText("");
+        infoFile.setText("Nuovo file");
     }
 
 //    private File openFileChooser(final FileChooserOption option) {
