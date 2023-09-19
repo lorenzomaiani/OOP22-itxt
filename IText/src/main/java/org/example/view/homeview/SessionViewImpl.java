@@ -15,7 +15,7 @@ import org.example.controller.session.SessionControllerImpl;
 import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
-import org.example.utils.VisualController;
+import org.example.utils.visualmanager.VisualController;
 
 import java.io.File;
 import java.io.IOException;
