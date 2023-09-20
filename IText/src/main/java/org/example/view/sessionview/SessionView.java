@@ -15,6 +15,11 @@ public interface SessionView {
     void updateGui();
 
     /**
+     * to handle the exit event on the main stage, used to save info on exit with the controller
+     */
+    void onExit();
+
+    /**
      * open a save file dialog to handle the input from user
      * who want to save the current file.
      */
