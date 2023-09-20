@@ -10,10 +10,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import org.example.controller.setting.SettingController;
 import org.example.controller.setting.SettingControllerImpl;
+import org.example.model.setting.SettingImpl;
 import org.example.model.setting.Theme;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Setting view implementation, Handling input from user in the setting GUI.
  */
-public final class  SettingViewImpl implements SettingView, Initializable {
+public final class  SettingViewImpl implements SettingView, Initializable, PropertyChangeListener {
 
     @FXML
     private BorderPane borderPane;
@@ -45,6 +48,7 @@ public final class  SettingViewImpl implements SettingView, Initializable {
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         fontChoiceBox.setOnAction(this::getFontFromChoiceBox);
         controller = new SettingControllerImpl();
+        SettingImpl.getInstance().addPropertyChangeListener(this);
     }
 
     @Override
@@ -85,5 +89,10 @@ public final class  SettingViewImpl implements SettingView, Initializable {
 
     private void log(final String msg) {
         System.out.println(msg);
+    }
+
+    @Override
+    public void propertyChange(final PropertyChangeEvent evt) {
+        System.out.println("Changed Setting Theme on: " + evt.getPropertyName());
     }
 }

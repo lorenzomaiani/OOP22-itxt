@@ -12,11 +12,14 @@ import javafx.scene.text.Font;
 
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
+import org.example.model.setting.SettingImpl;
 import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 import org.example.utils.visualmanager.VisualController;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,9 +32,9 @@ import java.util.stream.Stream;
 /**
  * Implementing the SessionView Interface.
  */
-public final class SessionViewImpl implements SessionView, Initializable {
+public final class SessionViewImpl implements SessionView, Initializable, PropertyChangeListener {
 
-    private static final int MAX_LONG = 15;
+    private  static final int MAX_LONG = 15;
 
     @FXML
     private BorderPane borderPane;
@@ -58,6 +61,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
         controller = new SessionControllerImpl();
+        SettingImpl.getInstance().addPropertyChangeListener(this);
     }
 
     @Override
@@ -128,4 +132,8 @@ public final class SessionViewImpl implements SessionView, Initializable {
         return sizeChoiceBox.getValue();
     }
 
+    @Override
+    public void propertyChange(final PropertyChangeEvent evt) {
+        System.out.println("Changed Session Theme on: " + evt.getPropertyName());
+    }
 }

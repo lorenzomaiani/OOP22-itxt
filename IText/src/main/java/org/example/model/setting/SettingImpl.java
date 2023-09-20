@@ -1,5 +1,7 @@
 package org.example.model.setting;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 /**
@@ -10,7 +12,7 @@ public final class SettingImpl implements Setting {
     private String mainDirectory;
     private String mainFont;
     private Theme appTheme;
-
+    private PropertyChangeSupport support;
     /**
      * Private construct matching singleton pattern.
      */
@@ -18,6 +20,7 @@ public final class SettingImpl implements Setting {
         this.appTheme = Theme.LIGHT;
         this.mainDirectory = "";
         this.mainFont = "";
+        support = new PropertyChangeSupport(this);
     }
 
     /**
@@ -26,6 +29,22 @@ public final class SettingImpl implements Setting {
      */
     public static SettingImpl getInstance() {
         return SETTING;
+    }
+
+    /**
+     * Methods to add listener on changing.
+     * @param pcl the property change listener
+     */
+    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    /**
+     * Methods to remove listener on changing.
+     * @param pcl the property change listener
+     */
+    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
     }
     @Override
     public String getMainDirectory() {
@@ -54,6 +73,7 @@ public final class SettingImpl implements Setting {
 
     @Override
     public void setAppTheme(final Theme appTheme) {
+        support.firePropertyChange("Theme", this.appTheme, appTheme);
         this.appTheme = appTheme;
     }
 
