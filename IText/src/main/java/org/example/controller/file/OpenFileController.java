@@ -24,6 +24,4 @@ public interface OpenFileController {
      * @return the model of the file opened
      */
     FileModel getOpenedFile();
-
-
 }

@@ -36,8 +36,8 @@ public final class GraphicsUtil {
                return new FileChooser().showOpenDialog(window);
            case DIRECTORY:
                return new DirectoryChooser().showDialog(window);
+           default:
+               return null;
        }
-
-        return null;
     }
 }

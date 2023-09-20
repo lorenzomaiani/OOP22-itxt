@@ -83,7 +83,8 @@ public final class SessionViewImpl implements SessionView, Initializable {
     public void startSaveDialog() {
         if (controller.isFileInfoSetted()) {
             log("Exist an opened file");
-            controller.saveFile(textArea.getText(), controller.getFileInfo().getFilePath(), controller.getFileInfo().getFileName());
+            controller.saveFile(textArea.getText(), controller.getFileInfo().getFilePath(),
+                    controller.getFileInfo().getFileName());
             infoFile.setText("Salvataggio in: " + controller.getFileInfo().getFileName());
         } else {
             log("Start save dialog");
