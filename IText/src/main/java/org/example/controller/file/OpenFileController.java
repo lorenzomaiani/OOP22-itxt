@@ -1,5 +1,7 @@
 package org.example.controller.file;
 
+import org.example.model.filemodel.FileModel;
+
 /**
  * Controller that execute all the operation on the opening of a new file.
  */
@@ -16,6 +18,12 @@ public interface OpenFileController {
      * @return the read text
      */
     String getTextFromText();
+
+    /**
+     * Get the opened file, use to check if save to another or rewrite the current one.
+     * @return the model of the file opened
+     */
+    FileModel getOpenedFile();
 
 
 }

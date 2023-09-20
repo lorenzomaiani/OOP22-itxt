@@ -36,6 +36,11 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
     }
 
     @Override
+    public FileModel getOpenedFile() {
+        return this.fileToOpen;
+    }
+
+    @Override
     public final String operationOnFile(final Void unused) {
         String temp;
         String text = "";

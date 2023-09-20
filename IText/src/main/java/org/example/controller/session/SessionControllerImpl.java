@@ -4,6 +4,7 @@ import org.example.controller.file.OpenFileController;
 import org.example.controller.file.OpenFileControllerImpl;
 import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
+import org.example.model.filemodel.FileModel;
 
 /**
  * Implementation of the SessionController.
@@ -11,6 +12,8 @@ import org.example.controller.file.SaveFileControllerImpl;
 public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
+    private OpenFileController openFileController;
+    private FileModel currentFileInSession;
 
 
     @Override
@@ -32,25 +35,28 @@ public final class SessionControllerImpl implements SessionController {
 
     @Override
     public String openFile(final String filePath, final String fileName) {
-        OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
-        return openFileController.isAnExistingFile() ? openFileController.getTextFromText() : "";
+        this.openFileController = new OpenFileControllerImpl(filePath, fileName);
+        if (openFileController.isAnExistingFile()) {
+            currentFileInSession = openFileController.getOpenedFile();
+            return openFileController.getTextFromText();
+        } else {
+            return "";
+        }
 
     }
 
     @Override
     public void restoreFileInfo() {
-        // infoFile.reset();
+        this.currentFileInSession = null;
     }
 
     @Override
-    public String getFileInfo() {
-        // return infoFile.getName;
-        return null;
+    public FileModel getFileInfo() {
+        return currentFileInSession;
     }
 
     @Override
     public boolean isFileInfoSetted() {
-        // return infoFile != null;
-        return false;
+        return currentFileInSession != null;
     }
 }

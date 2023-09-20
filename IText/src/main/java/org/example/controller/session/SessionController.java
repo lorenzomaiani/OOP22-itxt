@@ -1,5 +1,7 @@
 package org.example.controller.session;
 
+import org.example.model.filemodel.FileModel;
+
 /**
  * Controller that handle event coming from SessionView.
  */
@@ -29,7 +31,7 @@ public interface SessionController {
      * Get information about the opened file.
      * @return the path
      */
-    String getFileInfo();
+    FileModel getFileInfo();
 
     /**
      * check if a file is set.

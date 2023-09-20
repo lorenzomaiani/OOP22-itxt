@@ -3,6 +3,7 @@ package org.example.utils.graphics;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import org.example.model.setting.SettingImpl;
 
 import java.io.File;
 
@@ -24,10 +25,19 @@ public final class GraphicsUtil {
      * @return the file selected from the user.
      */
     public static File openFileChooser(final FileChooserOption option, final String title, final Window window) {
-        return switch (option) {
-            case SAVE -> new FileChooser().showSaveDialog(window);
-            case OPEN -> new FileChooser().showOpenDialog(window);
-            case DIRECTORY -> new DirectoryChooser().showDialog(window);
-        };
+       switch (option) {
+           case SAVE:
+               FileChooser fileChooser = new FileChooser();
+               if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
+                   fileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
+               }
+               return fileChooser.showSaveDialog(window);
+           case OPEN:
+               return new FileChooser().showOpenDialog(window);
+           case DIRECTORY:
+               return new DirectoryChooser().showDialog(window);
+       }
+
+        return null;
     }
 }

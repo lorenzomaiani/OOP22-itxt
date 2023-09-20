@@ -81,23 +81,27 @@ public final class SessionViewImpl implements SessionView, Initializable {
 
     @Override
     public void startSaveDialog() {
-        log("Start save dialog");
-        //openFileChooser(FileChooserOption.SAVE);
-        File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
-        if (sf != null) {
-            controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
-            infoFile.setText("Salvato in : " + controller.getFileInfo());
+        if (controller.isFileInfoSetted()) {
+            log("Exist an opened file");
+            controller.saveFile(textArea.getText(), controller.getFileInfo().getFilePath(), controller.getFileInfo().getFileName());
+            infoFile.setText("Salvataggio in: " + controller.getFileInfo().getFileName());
+        } else {
+            log("Start save dialog");
+            File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
+            if (sf != null) {
+                controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
+                infoFile.setText("Salvataggio in: " + sf.getName());
+            }
         }
-
     }
 
     @Override
     public void startOpenDialog() {
         log("Start Open Dialog");
-        //openFileChooser(FileChooserOption.OPEN);
         File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
         if (of != null) {
             textArea.setText(controller.openFile(of.getPath(), of.getName()));
+            infoFile.setText("File: " + of.getName());
         }
     }
 
@@ -106,22 +110,8 @@ public final class SessionViewImpl implements SessionView, Initializable {
         log("New Text");
         textArea.setText("");
         infoFile.setText("Nuovo file");
+        controller.restoreFileInfo();
     }
-
-//    private File openFileChooser(final FileChooserOption option) {
-//        final FileChooser fileChooser = new FileChooser();
-//       if(setting.getMainDirectory().isPresent()){
-//           fileChooser.setInitialDirectory(setting.getMainDirectory());
-//        }
-//        if (option == FileChooserOption.SAVE) {
-//            fileChooser.setTitle("Salvataggio");
-//        } else {
-//            fileChooser.setTitle("Apri");
-//        }
-//        return option == FileChooserOption.SAVE ? fileChooser.showSaveDialog(borderPane.getScene().getWindow())
-//                : fileChooser.showOpenDialog(borderPane.getScene().getWindow());
-//
-//    }
 
     private void log(final String mess) {
         System.out.println(new Date() + " " +  mess);
