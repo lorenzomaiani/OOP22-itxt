@@ -1,12 +1,14 @@
 package org.example.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.utils.constant.Constants;
+import org.example.view.sessionview.SessionViewImpl;
 
 import java.util.Objects;
 
@@ -25,12 +27,17 @@ public final class IText extends Application {
      */
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/Home.fxml"));
+        final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/Home.fxml"));
+        final Parent root = loader.load();
+        final SessionViewImpl controller =  loader.getController();
         final Scene scene = new Scene(root);
         primaryStage.setMinWidth(Constants.MIN_STAGE_WIDTH);
         primaryStage.setMinHeight(Constants.MIN_STAGE_HEIGHT);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/itxtIcon.png"))));
         primaryStage.setTitle("IText");
+        primaryStage.setOnCloseRequest(event -> {
+            controller.onExit();
+        });
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -14,6 +14,11 @@ public final class Constants {
     public static final double MIN_STAGE_HEIGHT = 400.0;
 
     /**
+     * Max long stream size
+     */
+    public static final int MAX_LONG = 15;
+
+    /**
      * Private constructor.
      */
     private Constants() {

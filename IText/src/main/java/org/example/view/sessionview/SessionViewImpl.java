@@ -34,8 +34,6 @@ import java.util.stream.Stream;
  */
 public final class SessionViewImpl implements SessionView, Initializable, PropertyChangeListener {
 
-    private  static final int MAX_LONG = 15;
-
     @FXML
     private BorderPane borderPane;
 
@@ -57,7 +55,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         fontChoiceBox.getItems().addAll(Font.getFamilies());
-        sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(SessionViewImpl.MAX_LONG).toList());
+        sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(Constants.MAX_LONG).toList());
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
         controller = new SessionControllerImpl();
@@ -74,7 +72,6 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         } catch (IOException e) {
             System.err.print("File not found, pls enter a valid file before");
         }
-
     }
 
     @Override
@@ -135,5 +132,9 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
         System.out.println("Changed Session Theme on: " + evt.getPropertyName());
+    }
+
+    public void onExit(){
+        System.out.println("On Exit...");
     }
 }
