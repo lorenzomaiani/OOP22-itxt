@@ -65,7 +65,7 @@ public final class SettingImpl implements Setting {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SettingImpl setting = (SettingImpl) o;
+        final SettingImpl setting = (SettingImpl) o;
         return mainDirectory.equals(setting.mainDirectory) && mainFont.equals(setting.mainFont) && appTheme == setting.appTheme;
     }
 

@@ -12,7 +12,6 @@ import org.example.model.filemodel.FileModel;
 public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
-    private OpenFileController openFileController;
     private FileModel currentFileInSession;
 
 
@@ -35,7 +34,7 @@ public final class SessionControllerImpl implements SessionController {
 
     @Override
     public String openFile(final String filePath, final String fileName) {
-        this.openFileController = new OpenFileControllerImpl(filePath, fileName);
+        final OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         if (openFileController.isAnExistingFile()) {
             currentFileInSession = openFileController.getOpenedFile();
             return openFileController.getTextFromText();

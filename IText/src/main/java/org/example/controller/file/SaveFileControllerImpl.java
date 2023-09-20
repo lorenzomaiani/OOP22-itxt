@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class SaveFileControllerImpl implements SaveFileController, FileOperationController<Void, String> {
 
-    private FileModel fileToSave;
+    private final FileModel fileToSave;
 
     /**
      * Constructor.
@@ -28,7 +28,7 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
             try {
                 return new File(fileToSave.getFilePath()).createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.print("Error on creating a file, please retry");
             }
         return false;
     }
@@ -47,15 +47,15 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
     @Override
     public final Void operationOnFile(final String s) {
         if (s != null) {
-            String[] values = s.split("\n");
+            final String[] values = s.split("\n");
             try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath()))) {
-                for (String value : values) {
+                for (final String value : values) {
                     bfw.write(value);
                     bfw.write("\n");
                 }
                 bfw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.print("Error on saving file, please retry");
             }
         }
         return null;

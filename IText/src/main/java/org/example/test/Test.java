@@ -3,7 +3,15 @@ package org.example.test;
 /**
  * Test class used to automatic testing.
  */
-public class Test {
+public final class Test {
+
+    /**
+     * Private constructor.
+     */
+    private Test() {
+
+    }
+
     /**
      * Class to execute automatic testing on the application.
      * @param args

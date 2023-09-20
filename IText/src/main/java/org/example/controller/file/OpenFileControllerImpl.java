@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class OpenFileControllerImpl implements OpenFileController, FileOperationController<String, Void> {
 
-    private FileModel fileToOpen;
+    private final FileModel fileToOpen;
 
     /**
      * Constructor.
@@ -35,23 +35,27 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
        return operationOnFile(null);
     }
 
+    /**
+     * Javadoc inside interface.
+     * @return the file
+     */
     @Override
     public FileModel getOpenedFile() {
         return this.fileToOpen;
     }
 
+
     @Override
     public final String operationOnFile(final Void unused) {
         String temp;
-        String text = "";
+        final StringBuilder text = new StringBuilder();
         try (BufferedReader bfr = new BufferedReader(new FileReader(this.fileToOpen.getFilePath()))) {
             while ((temp = bfr.readLine()) != null) {
-                text = text + temp + "\n";
-
+                text.append(temp).append("\n");
             }
-            return text;
+            return text.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.print("Error on Opening a file, pleas retry");
         }
         return null;
     }

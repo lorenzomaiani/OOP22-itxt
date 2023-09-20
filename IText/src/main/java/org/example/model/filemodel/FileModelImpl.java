@@ -9,7 +9,7 @@ import java.util.Objects;
 public final class FileModelImpl implements FileModel {
     private String path;
     private String name;
-    private Date creationDate;
+    private final Date creationDate;
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ public final class FileModelImpl implements FileModel {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FileModelImpl fileModel = (FileModelImpl) o;
+        final FileModelImpl fileModel = (FileModelImpl) o;
         return path.equals(fileModel.path) && name.equals(fileModel.name) && creationDate.equals(fileModel.creationDate);
     }
 

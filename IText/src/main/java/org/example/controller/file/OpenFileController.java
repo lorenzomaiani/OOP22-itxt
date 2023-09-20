@@ -20,8 +20,8 @@ public interface OpenFileController {
     String getTextFromText();
 
     /**
-     * Get the opened file, use to check if save to another or rewrite the current one.
-     * @return the model of the file opened
+     * Get the file model.
+     * @return the file model of the open file
      */
     FileModel getOpenedFile();
 }

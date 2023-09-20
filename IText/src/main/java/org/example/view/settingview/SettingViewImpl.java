@@ -1,4 +1,4 @@
-package org.example.view.settingView;
+package org.example.view.settingview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,9 +48,10 @@ public final class  SettingViewImpl implements SettingView, Initializable {
     }
 
     @Override
-    public void getMainDirectoryInput() {
+    public String getMainDirectoryInput() {
        log(mainDirectoryTextField.getText());
        controller.setMainDirectoryInSetting(mainDirectoryTextField.getText());
+       return mainDirectoryTextField.getText();
     }
 
     @Override
@@ -69,16 +70,17 @@ public final class  SettingViewImpl implements SettingView, Initializable {
 
     @Override
     public void searchIntoFileSystem() {
-        File f = GraphicsUtil.openFileChooser(FileChooserOption.DIRECTORY, "Sfoglia", borderPane.getScene().getWindow());
-        if (f.isDirectory()) {
+        final File f = GraphicsUtil.openFileChooser(FileChooserOption.DIRECTORY, "Sfoglia", borderPane.getScene().getWindow());
+        if (f != null && f.isDirectory()) {
             mainDirectoryTextField.setText(f.getAbsolutePath());
             controller.setMainDirectoryInSetting(mainDirectoryTextField.getText());
         }
     }
 
-    private void getFontFromChoiceBox(final ActionEvent event) {
+    private String getFontFromChoiceBox(final ActionEvent event) {
         log(fontChoiceBox.getValue());
         controller.setFontInSetting(fontChoiceBox.getValue());
+        return fontChoiceBox.getValue();
     }
 
     private void log(final String msg) {

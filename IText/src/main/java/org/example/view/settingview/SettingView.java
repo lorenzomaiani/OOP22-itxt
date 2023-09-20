@@ -1,4 +1,4 @@
-package org.example.view.settingView;
+package org.example.view.settingview;
 
 /**
  * Setting view interface, defines all methods to handle event from the setting GUI.
@@ -7,8 +7,9 @@ public interface SettingView {
 
     /**
      * Get input from a text field to set the main directory.
+     * @return the main directory selected by the user
      */
-    void getMainDirectoryInput();
+    String getMainDirectoryInput();
 
     /**
      *  Setting, after an input, the main theme to Light (default at start).

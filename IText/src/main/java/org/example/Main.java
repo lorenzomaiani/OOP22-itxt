@@ -6,7 +6,14 @@ import org.example.app.IText;
 /**
  * Application Main.
  */
-public class Main {
+public final class Main {
+
+    /**
+     * Private constructor.
+     */
+    private Main() {
+
+    }
     /**
      * Main launcher of the app.
      * @param args argument of main

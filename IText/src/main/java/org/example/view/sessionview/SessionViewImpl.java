@@ -1,4 +1,4 @@
-package org.example.view.homeview;
+package org.example.view.sessionview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,7 +88,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
             infoFile.setText("Salvataggio in: " + controller.getFileInfo().getFileName());
         } else {
             log("Start save dialog");
-            File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
+            final File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
             if (sf != null) {
                 controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
                 infoFile.setText("Salvataggio in: " + sf.getName());
@@ -99,7 +99,7 @@ public final class SessionViewImpl implements SessionView, Initializable {
     @Override
     public void startOpenDialog() {
         log("Start Open Dialog");
-        File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
+        final File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
         if (of != null) {
             textArea.setText(controller.openFile(of.getPath(), of.getName()));
             infoFile.setText("File: " + of.getName());
@@ -118,12 +118,14 @@ public final class SessionViewImpl implements SessionView, Initializable {
         System.out.println(new Date() + " " +  mess);
     }
 
-    private void getFontValue(final ActionEvent event) {
+    private String getFontValue(final ActionEvent event) {
         log(fontChoiceBox.getValue());
+        return fontChoiceBox.getValue();
     }
 
-    private void getSizeValue(final ActionEvent event) {
+    private int getSizeValue(final ActionEvent event) {
         log(sizeChoiceBox.getValue().toString());
+        return sizeChoiceBox.getValue();
     }
 
 }

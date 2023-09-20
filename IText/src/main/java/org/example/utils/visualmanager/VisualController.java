@@ -16,6 +16,13 @@ import java.util.Optional;
 public final class VisualController {
 
     /**
+     * Private constructor.
+     */
+    private VisualController() {
+
+    }
+
+    /**
      * static method which change the scene in a specific stage.
      * @param fxmlFileName the name of the FXML file which it wants to load
      * @param event event passed from an interration wiht a button
