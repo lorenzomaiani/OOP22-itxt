@@ -12,21 +12,19 @@ import org.example.controller.setting.SettingController;
 import org.example.controller.setting.SettingControllerImpl;
 import org.example.model.setting.SettingImpl;
 import org.example.model.setting.Theme;
-import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.net.URL;
-import java.util.Objects;
+import java.net.URL;;
 import java.util.ResourceBundle;
 
 /**
  * Setting view implementation, Handling input from user in the setting GUI.
  */
-public final class  SettingViewImpl implements SettingView, Initializable, PropertyChangeListener {
+public final class SettingViewImpl implements SettingView, Initializable, PropertyChangeListener {
 
     @FXML
     private BorderPane borderPane;
@@ -95,10 +93,6 @@ public final class  SettingViewImpl implements SettingView, Initializable, Prope
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)){
-            borderPane.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
-        } else {
-            borderPane.getScene().getStylesheets().remove(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
-        }
+        GraphicsUtil.changeAppTheme(borderPane.getScene(), this);
     }
 }

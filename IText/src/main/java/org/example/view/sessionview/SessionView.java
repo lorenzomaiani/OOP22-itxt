@@ -15,7 +15,7 @@ public interface SessionView {
     void updateGui();
 
     /**
-     * to handle the exit event on the main stage, used to save info on exit with the controller
+     * to handle the exit event on the main stage, used to save info on exit with the controller.
      */
     void onExit();
 

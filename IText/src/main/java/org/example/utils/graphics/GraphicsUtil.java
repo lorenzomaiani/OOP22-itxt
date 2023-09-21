@@ -1,11 +1,15 @@
 package org.example.utils.graphics;
 
+import javafx.scene.Scene;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import org.example.model.setting.SettingImpl;
+import org.example.model.setting.Theme;
+import org.example.utils.constant.Constants;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * Utility class used to create single element to display.
@@ -39,5 +43,18 @@ public final class GraphicsUtil {
            default:
                return null;
        }
+    }
+
+
+    public static void changeAppTheme(Scene scene, Object o){
+        if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(o.getClass().getResource(
+                            Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        } else {
+            scene.getStylesheets().remove(
+                    Objects.requireNonNull(o.getClass().getResource(
+                            Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        }
     }
 }

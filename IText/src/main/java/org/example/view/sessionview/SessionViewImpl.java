@@ -132,15 +132,11 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        //System.out.println("Changed Session Theme on: " + evt.getPropertyName());
-        if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)){
-            borderPane.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
-        } else {
-            borderPane.getScene().getStylesheets().remove(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
-        }
+        GraphicsUtil.changeAppTheme(borderPane.getScene(), this);
     }
 
-    public void onExit(){
+    @Override
+    public void onExit() {
         System.out.println("On Exit...");
     }
 }
