@@ -13,7 +13,6 @@ import javafx.scene.text.Font;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
 import org.example.model.setting.SettingImpl;
-import org.example.model.setting.Theme;
 import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;

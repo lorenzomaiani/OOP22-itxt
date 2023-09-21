@@ -46,7 +46,12 @@ public final class GraphicsUtil {
     }
 
 
-    public static void changeAppTheme(Scene scene, Object o){
+    /**
+     * Methods to change the application theme.
+     * @param scene
+     * @param o
+     */
+    public static void changeAppTheme(final Scene scene, final Object o) {
         if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
             scene.getStylesheets().add(
                     Objects.requireNonNull(o.getClass().getResource(
