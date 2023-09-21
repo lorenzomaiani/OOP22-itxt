@@ -1,10 +1,5 @@
 
 .root {
-   -fx-background: rgba(60, 60, 60, 255);
-}
-
-
-.root {
     -fx-accent: #1e74c6;
     -fx-focus-color: -fx-accent;
     -fx-base: #373e43;
