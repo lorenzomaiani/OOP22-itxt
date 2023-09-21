@@ -12,6 +12,7 @@ import org.example.controller.setting.SettingController;
 import org.example.controller.setting.SettingControllerImpl;
 import org.example.model.setting.SettingImpl;
 import org.example.model.setting.Theme;
+import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 
@@ -19,6 +20,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -60,14 +62,14 @@ public final class  SettingViewImpl implements SettingView, Initializable, Prope
 
     @Override
     public void setThemeToLight() {
-        log("Theme light");
+        //log("Theme light");
         darkCheckBox.setSelected(false);
         controller.setAppTheme(Theme.LIGHT);
     }
 
     @Override
     public void setThemeToDark() {
-        log("Theme dark");
+        //log("Theme dark");
         lightCheckBox.setSelected(false);
         controller.setAppTheme(Theme.DARK);
     }
@@ -93,6 +95,10 @@ public final class  SettingViewImpl implements SettingView, Initializable, Prope
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        System.out.println("Changed Setting Theme on: " + evt.getPropertyName());
+        if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)){
+            borderPane.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        } else {
+            borderPane.getScene().getStylesheets().remove(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        }
     }
 }

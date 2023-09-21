@@ -18,6 +18,8 @@ public final class Constants {
      */
     public static final int MAX_LONG = 15;
 
+    public static final String DARK_THEME_CSS_LOCATION = "/css/dark_style.css";
+
     /**
      * Private constructor.
      */

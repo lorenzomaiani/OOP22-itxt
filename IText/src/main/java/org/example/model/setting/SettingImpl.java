@@ -12,7 +12,7 @@ public final class SettingImpl implements Setting {
     private String mainDirectory;
     private String mainFont;
     private Theme appTheme;
-    private PropertyChangeSupport support;
+    private final PropertyChangeSupport support;
     /**
      * Private construct matching singleton pattern.
      */

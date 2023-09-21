@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
 import org.example.model.setting.SettingImpl;
+import org.example.model.setting.Theme;
 import org.example.utils.constant.Constants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
@@ -131,7 +132,12 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        System.out.println("Changed Session Theme on: " + evt.getPropertyName());
+        //System.out.println("Changed Session Theme on: " + evt.getPropertyName());
+        if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)){
+            borderPane.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        } else {
+            borderPane.getScene().getStylesheets().remove(Objects.requireNonNull(this.getClass().getResource(Constants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        }
     }
 
     public void onExit(){

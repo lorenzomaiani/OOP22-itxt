@@ -16,6 +16,7 @@ import java.util.Objects;
  */
 public final class IText extends Application {
 
+    private Scene scene;
     /**
      * Start methods.
      * @param primaryStage the primary stage for this application, onto which
@@ -29,8 +30,7 @@ public final class IText extends Application {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/Home.fxml"));
         final Parent root = loader.load();
         final SessionViewImpl controller =  loader.getController();
-        final Scene scene = new Scene(root);
-        final String cssLocation = Objects.requireNonNull(this.getClass().getResource("/css/dark_style.css")).toExternalForm();
+        scene = new Scene(root);
         primaryStage.setMinWidth(Constants.MIN_STAGE_WIDTH);
         primaryStage.setMinHeight(Constants.MIN_STAGE_HEIGHT);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/itxtIcon.png"))));
@@ -41,5 +41,6 @@ public final class IText extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }
 
