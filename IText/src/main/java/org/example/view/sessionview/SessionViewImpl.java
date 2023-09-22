@@ -3,17 +3,16 @@ package org.example.view.sessionview;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
-import javafx.scene.text.Text;
-import org.example.app.IText;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
 import org.example.model.setting.SettingImpl;
@@ -155,10 +154,11 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     }
 
-    private void initTextAreaOnChangeMethods(){
+    private void initTextAreaOnChangeMethods() {
         textArea.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+            public void changed(final ObservableValue<? extends String> observable,
+                                final String oldValue, final String newValue) {
                 isTextAlreadySaved = false;
             }
         });

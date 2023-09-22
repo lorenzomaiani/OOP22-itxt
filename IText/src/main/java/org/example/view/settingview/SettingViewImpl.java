@@ -93,7 +93,7 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
     }
 
     @Override
-    public void applyAndClose(){
+    public void applyAndClose() {
         this.borderPane.getScene().getWindow().hide();
     }
 
