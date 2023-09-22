@@ -48,7 +48,16 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         fontChoiceBox.setOnAction(this::getFontFromChoiceBox);
         controller = new SettingControllerImpl();
+        if (SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
+            this.darkCheckBox.setSelected(true);
+            this.lightCheckBox.setSelected(false);
+        } else {
+            this.lightCheckBox.setSelected(true);
+            this.darkCheckBox.setSelected(false);
+        }
         SettingImpl.getInstance().addPropertyChangeListener(this);
+
+
     }
 
     @Override
@@ -62,6 +71,7 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
     public void setThemeToLight() {
         //log("Theme light");
         darkCheckBox.setSelected(false);
+        lightCheckBox.setSelected(true);
         controller.setAppTheme(Theme.LIGHT);
     }
 
@@ -69,6 +79,7 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
     public void setThemeToDark() {
         //log("Theme dark");
         lightCheckBox.setSelected(false);
+        darkCheckBox.setSelected(true);
         controller.setAppTheme(Theme.DARK);
     }
 
@@ -79,6 +90,11 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
             mainDirectoryTextField.setText(f.getAbsolutePath());
             controller.setMainDirectoryInSetting(mainDirectoryTextField.getText());
         }
+    }
+
+    @Override
+    public void applyAndClose(){
+        this.borderPane.getScene().getWindow().hide();
     }
 
     private String getFontFromChoiceBox(final ActionEvent event) {

@@ -47,6 +47,7 @@
             </Label>
             <CheckBox fx:id="darkCheckBox" layoutX="343.0" layoutY="247.0" mnemonicParsing="false" onAction="#setThemeToDark" text="Dark" />
             <CheckBox fx:id="lightCheckBox" layoutX="267.0" layoutY="247.0" mnemonicParsing="false" onAction="#setThemeToLight" selected="true" text="Light" />
+            <Button layoutX="473.0" layoutY="274.0" mnemonicParsing="false" onAction="#applyAndClose" prefHeight="31.0" prefWidth="78.0" text="Applica" />
          </children>
       </AnchorPane>
    </center>

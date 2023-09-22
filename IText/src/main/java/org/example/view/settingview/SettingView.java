@@ -26,7 +26,10 @@ public interface SettingView {
      */
     void searchIntoFileSystem();
 
-
+    /**
+     * After choose the setting option, it closes the windows and apply the changes
+     */
+    void applyAndClose();
 
 
 }
