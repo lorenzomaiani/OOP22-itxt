@@ -6,17 +6,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+
+import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
+import javafx.stage.Stage;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
 import org.example.model.setting.SettingImpl;
-import org.example.utils.constant.Constants;
+import org.example.utils.constant.NumericConstants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 import org.example.utils.visualmanager.VisualController;
@@ -52,15 +53,16 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     @FXML
     private Label infoFile;
 
+    private Stage stage;
+
     private SessionController controller;
 
     private boolean isTextAlreadySaved = false;
 
-
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         fontChoiceBox.getItems().addAll(Font.getFamilies());
-        sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(Constants.MAX_LONG).toList());
+        sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(NumericConstants.MAX_LONG).toList());
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
         controller = new SessionControllerImpl();
@@ -75,16 +77,10 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         try {
             VisualController.chageStage("layout/Setting.fxml", "Setting",
                     new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
-                    Optional.of(Constants.MIN_STAGE_WIDTH), Optional.of(Constants.MIN_STAGE_HEIGHT));
+                    Optional.of(NumericConstants.MIN_STAGE_WIDTH), Optional.of(NumericConstants.MIN_STAGE_HEIGHT));
         } catch (IOException e) {
             System.err.print("File not found, pls enter a valid file before");
         }
-    }
-
-    @Override
-    public void updateGui() {
-        log("Update Gui");
-
     }
 
     @Override
@@ -123,6 +119,26 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         controller.restoreFileInfo();
     }
 
+    @Override
+    public void propertyChange(final PropertyChangeEvent evt) {
+        GraphicsUtil.changeAppTheme(borderPane.getScene(), this);
+    }
+
+    @Override
+    public void onExit() {
+        log("On exit...");
+        if (!isTextAlreadySaved) {
+            log("Text need to be saved");
+            showExitDialog();
+
+        } else {
+            log("Exit easy");
+            stage = (Stage) borderPane.getScene().getWindow();
+            stage.close();
+        }
+
+    }
+
     private void log(final String mess) {
         System.out.println(new Date() + " " +  mess);
     }
@@ -137,23 +153,6 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         return sizeChoiceBox.getValue();
     }
 
-    @Override
-    public void propertyChange(final PropertyChangeEvent evt) {
-        GraphicsUtil.changeAppTheme(borderPane.getScene(), this);
-    }
-
-    @Override
-    public void onExit() {
-        log("On exit");
-        if (!isTextAlreadySaved) {
-            log("Text need to be saved");
-            // dialog e conseguente salvataggio
-        } else {
-            log("Exit easy");
-        }
-
-    }
-
     private void initTextAreaOnChangeMethods() {
         textArea.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -162,5 +161,30 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                 isTextAlreadySaved = false;
             }
         });
+    }
+
+    private void showExitDialog() {
+        final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
+        final ButtonType saveButton = new ButtonType("Meglio salvare va!", ButtonBar.ButtonData.NO);
+        final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Il file e' stato modificato e non salvato, sei sicuro di voler uscire senza salvare?",
+                sureButton, saveButton, ButtonType.CANCEL);
+        exitAlert.setTitle("Esci");
+        exitAlert.setHeaderText("L'app sta per chiudersi");
+        final Optional<ButtonType> result = exitAlert.showAndWait();
+        if (result.isPresent()) {
+            ButtonType buttonType = result.get();
+            if (buttonType.equals(sureButton)) {
+                log("Exit without saving");
+                stage = (Stage) borderPane.getScene().getWindow();
+                stage.close();
+            } else if (buttonType.equals(saveButton)) {
+                log("Save");
+                startSaveDialog();
+            } else if (buttonType.equals(ButtonType.CANCEL)) {
+                log("Hide");
+                exitAlert.close();
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ package org.example.utils.constant;
 /**
  * Utility static constants, usefully to avoid magic number.
  */
-public final class Constants {
+public final class NumericConstants {
     /**
      * Minimum width of the stage.
      */
@@ -18,15 +18,12 @@ public final class Constants {
      */
     public static final int MAX_LONG = 15;
 
-    /**
-     * The location of the css style code.
-     */
-    public static final String DARK_THEME_CSS_LOCATION = "/css/dark_style.css";
+   ;
 
     /**
      * Private constructor.
      */
-    private Constants() {
+    private NumericConstants() {
 
     }
 

@@ -10,11 +10,6 @@ public interface SessionView {
     void loadSettingStage();
 
     /**
-     * refresh the SessionGui if something is changed.
-     */
-    void updateGui();
-
-    /**
      * to handle the exit event on the main stage, used to save info on exit with the controller.
      */
     void onExit();
