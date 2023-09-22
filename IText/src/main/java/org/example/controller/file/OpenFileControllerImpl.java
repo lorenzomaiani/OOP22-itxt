@@ -55,7 +55,7 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
             }
             return text.toString();
         } catch (IOException e) {
-            System.err.print("Error on Opening a file, pleas retry");
+            System.err.print("Error on Opening a file, please retry");
         }
         return null;
     }
