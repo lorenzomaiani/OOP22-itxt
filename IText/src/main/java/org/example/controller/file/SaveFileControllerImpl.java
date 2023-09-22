@@ -25,8 +25,12 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
 
     @Override
     public final boolean createAFile() {
-            try {
-                return new File(fileToSave.getFilePath()).createNewFile();
+            try{
+                System.out.println(fileToSave.getFilePath().replace(fileToSave.getFileName(), ""));
+                boolean result = new File(fileToSave.getFilePath().replace(fileToSave.getFileName(), "")).createNewFile();
+                if (result){
+                    return new File(fileToSave.getFilePath()).createNewFile();
+                }
             } catch (IOException e) {
                 System.err.print("Error on creating a file, please retry");
             }
