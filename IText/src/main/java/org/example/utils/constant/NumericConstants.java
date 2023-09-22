@@ -18,8 +18,6 @@ public final class NumericConstants {
      */
     public static final int MAX_LONG = 15;
 
-   ;
-
     /**
      * Private constructor.
      */

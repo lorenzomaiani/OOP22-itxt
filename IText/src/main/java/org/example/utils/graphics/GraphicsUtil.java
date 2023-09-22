@@ -6,7 +6,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import org.example.model.setting.SettingImpl;
 import org.example.model.setting.Theme;
-import org.example.utils.constant.NumericConstants;
 import org.example.utils.constant.StringConstants;
 
 import java.io.File;

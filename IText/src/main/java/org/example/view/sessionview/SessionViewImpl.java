@@ -5,14 +5,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-
 import javafx.scene.control.*;
-
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
-
 import javafx.stage.Stage;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
@@ -21,7 +17,6 @@ import org.example.utils.constant.NumericConstants;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
 import org.example.utils.visualmanager.VisualController;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
