@@ -5,6 +5,7 @@ import org.example.controller.file.OpenFileControllerImpl;
 import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
 import org.example.model.filemodel.FileModel;
+import org.example.model.filemodel.FileModelImpl;
 
 /**
  * Implementation of the SessionController.
@@ -13,7 +14,6 @@ public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
     private FileModel currentFileInSession;
-
 
     @Override
     public void saveFile(final String text, final String filePath, final String fileName) {
@@ -25,6 +25,7 @@ public final class SessionControllerImpl implements SessionController {
                 if (!saveFileController.isAlreadyExist()) {
                     saveFileController.createAFile();
                 }
+                currentFileInSession = new FileModelImpl(filePath, fileName);
                 saveFileController.saveOnFile(text);
 
             }
