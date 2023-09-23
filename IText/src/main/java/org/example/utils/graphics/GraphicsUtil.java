@@ -20,7 +20,6 @@ public final class GraphicsUtil {
 
     }
 
-
     /**
      * Create a File Chooser.
      * @param option declare if is a SAVE or OPEN file chooser.
@@ -31,13 +30,23 @@ public final class GraphicsUtil {
     public static File openFileChooser(final FileChooserOption option, final String title, final Window window) {
        switch (option) {
            case SAVE:
-               FileChooser fileChooser = new FileChooser();
+               FileChooser saveFileChooser = new FileChooser();
+               FileChooser.ExtensionFilter saveFilter =
+                       new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
+               saveFileChooser.getExtensionFilters().add(saveFilter);
                if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
-                   fileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
+                   saveFileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
                }
-               return fileChooser.showSaveDialog(window);
+               return saveFileChooser.showSaveDialog(window);
            case OPEN:
-               return new FileChooser().showOpenDialog(window);
+               FileChooser openFileChooser = new FileChooser();
+               FileChooser.ExtensionFilter openFilter =
+                       new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
+               openFileChooser.getExtensionFilters().add(openFilter);
+               if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
+                   openFileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
+               }
+               return openFileChooser.showOpenDialog(window);
            case DIRECTORY:
                return new DirectoryChooser().showDialog(window);
            default:
@@ -45,11 +54,10 @@ public final class GraphicsUtil {
        }
     }
 
-
     /**
      * Methods to change the application theme.
-     * @param scene
-     * @param o
+     * @param scene the scene that need to be change
+     * @param o the root
      */
     public static void changeAppTheme(final Scene scene, final Object o) {
         if (!SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
