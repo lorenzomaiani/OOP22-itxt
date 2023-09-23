@@ -25,7 +25,7 @@ public final class SessionControllerImpl implements SessionController {
                 if (!saveFileController.isAlreadyExist()) {
                     saveFileController.createAFile();
                 }
-                currentFileInSession = new FileModelImpl(filePath, fileName);
+                currentFileInSession = saveFileController.getFileToSave();
                 saveFileController.saveOnFile(text);
 
             }

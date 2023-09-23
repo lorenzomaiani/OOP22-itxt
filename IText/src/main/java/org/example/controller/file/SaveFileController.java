@@ -1,5 +1,7 @@
 package org.example.controller.file;
 
+import org.example.model.filemodel.FileModel;
+
 /**
  * Controller that save information in a specific file.
  */
@@ -22,4 +24,10 @@ public interface SaveFileController {
      * @param mess the text to write
      */
     void saveOnFile(String mess);
+
+    /**
+     * Get the file model of the file to be saved.
+     * @return the file model
+     */
+    FileModel getFileToSave();
 }

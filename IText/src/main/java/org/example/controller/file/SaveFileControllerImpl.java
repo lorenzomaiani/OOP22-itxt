@@ -2,6 +2,8 @@ package org.example.controller.file;
 
 import org.example.model.filemodel.FileModel;
 import org.example.model.filemodel.FileModelImpl;
+import org.example.utils.constant.StringConstants;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +15,7 @@ import java.io.IOException;
 public class SaveFileControllerImpl implements SaveFileController, FileOperationController<Void, String> {
 
     private final FileModel fileToSave;
+
 
     /**
      * Constructor.
@@ -26,10 +29,14 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
     @Override
     public final boolean createAFile() {
             try {
-                System.out.println(fileToSave.getFilePath().replace(fileToSave.getFileName(), ""));
-                boolean result = new File(fileToSave.getFilePath().replace(fileToSave.getFileName(), "")).createNewFile();
+                final String pathWithoutFileName = fileToSave.getFilePath().replace(
+                        fileToSave.getFileName(), "");
+                final String directoryName = fileToSave.getFileName().split("\\.")[0];
+
+                boolean result = new File(pathWithoutFileName + fileToSave.getFileName().split("\\.")[0]).mkdir();
                 if (result) {
-                    return new File(fileToSave.getFilePath()).createNewFile();
+                    fileToSave.setFilePath(pathWithoutFileName + directoryName + StringConstants.SEPARATOR + fileToSave.getFileName()); // reset the previous selected path to saving
+                    return new File(pathWithoutFileName + directoryName + StringConstants.SEPARATOR + fileToSave.getFileName()).createNewFile();
                 }
             } catch (IOException e) {
                 System.err.print("Error on creating a file, please retry");
@@ -45,6 +52,11 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
     @Override
     public final void saveOnFile(final String mess) {
         operationOnFile(mess);
+    }
+
+    @Override
+    public FileModel getFileToSave() {
+        return this.fileToSave;
     }
 
 
