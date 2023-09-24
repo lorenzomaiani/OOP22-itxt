@@ -3,7 +3,10 @@ package org.example.model.info;
 import org.example.model.filemodel.FileModel;
 import org.example.model.setting.Setting;
 
-public class InfoImpl implements Info{
+/**
+ * Implementation of Info interface.
+ */
+public final class InfoImpl implements Info {
 
     private FileModel fileModel;
     private Setting setting;
@@ -15,7 +18,7 @@ public class InfoImpl implements Info{
     }
 
     @Override
-    public void setFileModel(FileModel fileModel) {
+    public void setFileModel(final FileModel fileModel) {
         this.fileModel = fileModel;
     }
 
@@ -24,7 +27,8 @@ public class InfoImpl implements Info{
         return setting;
     }
 
-    public void setSetting(Setting setting) {
+    @Override
+    public void setSetting(final Setting setting) {
         this.setting = setting;
     }
 

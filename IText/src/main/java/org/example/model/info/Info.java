@@ -13,20 +13,26 @@ public interface Info {
      *
      * @return the loaded file
      */
-    public FileModel getFileModel();
+    FileModel getFileModel();
 
     /**
      * Set a new File model, after opening a new one.
      *
      * @param fileModel the file
      */
-    public void setFileModel(FileModel fileModel);
+   void setFileModel(FileModel fileModel);
 
     /**
      * Get the setting.
      *
      * @return the setting
      */
-    public Setting getSetting();
+    Setting getSetting();
+
+    /**
+     * Set setting.
+     * @param setting to set.
+     */
+    void setSetting(Setting setting);
 
 }

@@ -2,10 +2,17 @@ package org.example.controller.saver;
 
 import org.example.model.info.Info;
 
-public class SaverImpl implements Saver{
+/**
+ * Implementation class of Saver interface.
+ */
+public class SaverImpl implements Saver {
     private Info info;
 
-    public SaverImpl(Info info){
+    /**
+     * Constructor.
+     * @param info the info
+     */
+    public SaverImpl(final Info info) {
         this.info = info;
     }
 

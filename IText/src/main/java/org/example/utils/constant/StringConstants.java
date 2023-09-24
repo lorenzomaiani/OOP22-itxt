@@ -12,6 +12,9 @@ public final class StringConstants {
      */
     public static final String DARK_THEME_CSS_LOCATION = "/css/dark_style.css";
 
+    /**
+     * String path separator, depending on which operating system is running.
+     */
     public static final String SEPARATOR = File.separator;
 
     private StringConstants() {

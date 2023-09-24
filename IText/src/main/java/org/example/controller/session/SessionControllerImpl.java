@@ -5,7 +5,6 @@ import org.example.controller.file.OpenFileControllerImpl;
 import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
 import org.example.model.filemodel.FileModel;
-import org.example.model.filemodel.FileModelImpl;
 import org.example.model.info.Info;
 import org.example.model.info.InfoImpl;
 

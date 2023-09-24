@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * SaveFileController implementation class.
  */
-public class SaveFileControllerImpl implements SaveFileController, FileOperationController<Void, String> {
+public final class SaveFileControllerImpl implements SaveFileController, FileOperationController<Void, String> {
 
     private final FileModel fileToSave;
 
@@ -27,7 +27,7 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
     }
 
     @Override
-    public final boolean createAFile() {
+    public boolean createAFile() {
             try {
                 final String pathWithoutFileName = fileToSave.getFilePath().replace(
                         fileToSave.getFileName(), "");
@@ -35,8 +35,10 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
 
                 boolean result = new File(pathWithoutFileName + fileToSave.getFileName().split("\\.")[0]).mkdir();
                 if (result) {
-                    fileToSave.setFilePath(pathWithoutFileName + directoryName + StringConstants.SEPARATOR + fileToSave.getFileName()); // reset the previous selected path to saving
-                    return new File(pathWithoutFileName + directoryName + StringConstants.SEPARATOR + fileToSave.getFileName()).createNewFile();
+                    fileToSave.setFilePath(pathWithoutFileName + directoryName
+                            + StringConstants.SEPARATOR + fileToSave.getFileName()); // reset the previous selected path to saving
+                    return new File(pathWithoutFileName + directoryName
+                            + StringConstants.SEPARATOR + fileToSave.getFileName()).createNewFile();
                 }
             } catch (IOException e) {
                 System.err.print("Error on creating a file, please retry");
@@ -45,12 +47,12 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
     }
 
     @Override
-    public final boolean isAlreadyExist() {
+    public boolean isAlreadyExist() {
         return new File(fileToSave.getFilePath()).isFile();
     }
 
     @Override
-    public final void saveOnFile(final String mess) {
+    public void saveOnFile(final String mess) {
         operationOnFile(mess);
     }
 
@@ -61,7 +63,7 @@ public class SaveFileControllerImpl implements SaveFileController, FileOperation
 
 
     @Override
-    public final Void operationOnFile(final String s) {
+    public Void operationOnFile(final String s) {
         if (s != null) {
             final String[] values = s.split("\n");
             try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath()))) {
