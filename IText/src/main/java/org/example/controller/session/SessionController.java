@@ -2,6 +2,8 @@ package org.example.controller.session;
 
 import org.example.model.filemodel.FileModel;
 
+import java.io.IOException;
+
 /**
  * Controller that handle event coming from SessionView.
  */
@@ -38,4 +40,9 @@ public interface SessionController {
      * @return true if it's set, false otherwise.
      */
     boolean isFileInfoSetted();
+
+    /**
+     * Save information about text and setting when the application is closing.
+     */
+    void saveInfoOnClose() throws IOException;
 }

@@ -123,16 +123,16 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     public void onExit() {
         log("On exit...");
         if (!isTextAlreadySaved) {
-            log("Text need to be saved");
             showExitDialog();
-            // call controller saver before exit.
-
         } else {
-            log("Exit easy");
             stage = (Stage) borderPane.getScene().getWindow();
             stage.close();
         }
-
+        try {
+            controller.saveInfoOnClose();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void log(final String mess) {
