@@ -6,6 +6,8 @@ import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
 import org.example.model.filemodel.FileModel;
 import org.example.model.filemodel.FileModelImpl;
+import org.example.model.info.Info;
+import org.example.model.info.InfoImpl;
 
 /**
  * Implementation of the SessionController.
@@ -13,7 +15,7 @@ import org.example.model.filemodel.FileModelImpl;
 public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
-    private FileModel currentFileInSession;
+    private final Info info = new InfoImpl();
 
     @Override
     public void saveFile(final String text, final String filePath, final String fileName) {
@@ -25,7 +27,8 @@ public final class SessionControllerImpl implements SessionController {
                 if (!saveFileController.isAlreadyExist()) {
                     saveFileController.createAFile();
                 }
-                currentFileInSession = saveFileController.getFileToSave();
+                info.setFileModel(saveFileController.getFileToSave());
+                System.out.println(info.getFileModel().getFilePath());
                 saveFileController.saveOnFile(text);
 
             }
@@ -37,26 +40,25 @@ public final class SessionControllerImpl implements SessionController {
     public String openFile(final String filePath, final String fileName) {
         final OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         if (openFileController.isAnExistingFile()) {
-            currentFileInSession = openFileController.getOpenedFile();
+            info.setFileModel(openFileController.getOpenedFile());
             return openFileController.getTextFromText();
         } else {
             return "";
         }
-
     }
 
     @Override
     public void restoreFileInfo() {
-        this.currentFileInSession = null;
+        info.setFileModel(null);
     }
 
     @Override
     public FileModel getFileInfo() {
-        return currentFileInSession;
+        return info.getFileModel();
     }
 
     @Override
     public boolean isFileInfoSetted() {
-        return currentFileInSession != null;
+        return info.getFileModel() != null;
     }
 }

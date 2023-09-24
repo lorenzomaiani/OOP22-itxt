@@ -125,6 +125,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         if (!isTextAlreadySaved) {
             log("Text need to be saved");
             showExitDialog();
+            // call controller saver before exit.
 
         } else {
             log("Exit easy");
@@ -160,7 +161,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     private void showExitDialog() {
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
-        final ButtonType saveButton = new ButtonType("Meglio salvare va!", ButtonBar.ButtonData.NO);
+        final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Il file e' stato modificato e non salvato, sei sicuro di voler uscire senza salvare?",
                 sureButton, saveButton, ButtonType.CANCEL);
@@ -176,6 +177,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
             } else if (buttonType.equals(saveButton)) {
                 log("Save");
                 startSaveDialog();
+                stage = (Stage) borderPane.getScene().getWindow();
+                stage.close();
             } else if (buttonType.equals(ButtonType.CANCEL)) {
                 log("Hide");
                 exitAlert.close();
