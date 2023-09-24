@@ -1,8 +1,6 @@
 package org.example.controller.saver;
 
 import org.example.model.info.Info;
-import org.example.model.setting.Setting;
-import org.example.model.setting.SettingImpl;
 import org.example.utils.constant.StringConstants;
 
 import java.io.BufferedWriter;
@@ -13,12 +11,12 @@ import java.io.IOException;
 /**
  * Implementation class of Saver interface.
  */
-public class SaverImpl implements Saver {
+public final class SaverImpl implements Saver {
     private Info info;
     private String home = System.getProperty("user.home");
-    private static final String pathToSettingDirectory = System.getProperty("user.home")
+    private static final String PATH_TO_SETTING_DIRECTORY = System.getProperty("user.home")
             + StringConstants.SEPARATOR + "Documents" + StringConstants.SEPARATOR + "ITextSetting";
-    private static final String pathToSettingFile = pathToSettingDirectory + StringConstants.SEPARATOR + "Setting.bin";
+    private static final String PATH_TO_SETTING_FILE = PATH_TO_SETTING_DIRECTORY + StringConstants.SEPARATOR + "Setting.bin";
 
     /**
      * Constructor.
@@ -30,10 +28,10 @@ public class SaverImpl implements Saver {
 
     @Override
     public void saveSettingOnClose() throws IOException {
-        final File settingFile = new File(pathToSettingFile);
-        final File directory = new File(pathToSettingDirectory);
-        System.out.println("Path to direcotry: " + pathToSettingDirectory);
-        System.out.println("Path to file: " + pathToSettingFile);
+        final File settingFile = new File(PATH_TO_SETTING_FILE);
+        final File directory = new File(PATH_TO_SETTING_DIRECTORY);
+        System.out.println("Path to direcotry: " + PATH_TO_SETTING_DIRECTORY);
+        System.out.println("Path to file: " + PATH_TO_SETTING_FILE);
         if (!directory.isDirectory()) { // if directory doesn't exist...
             if (directory.mkdir()) { // create a directory
                 if (!settingFile.isFile()) {  // if file doesn't exist...
@@ -53,8 +51,8 @@ public class SaverImpl implements Saver {
      *
      * @param file
      */
-    private void writeSettingOnFile(File file) {
-        try(BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
+    private void writeSettingOnFile(final File file) {
+        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))) {
             bfw.write(info.getSetting().getMainDirectory());
             bfw.newLine();
             bfw.write(info.getSetting().getMainFont());
@@ -62,7 +60,7 @@ public class SaverImpl implements Saver {
             bfw.write(info.getSetting().getAppTheme().toString());
             bfw.newLine();
             bfw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Errore nella scrittura del file, ERR: " + e.getMessage());
         }
     }
