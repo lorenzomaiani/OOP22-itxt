@@ -17,6 +17,17 @@ public final class StringConstants {
      */
     public static final String SEPARATOR = File.separator;
 
+    /**
+     * Main setting directory path.
+     */
+    public static final String PATH_TO_SETTING_DIRECTORY = System.getProperty("user.home")
+            + StringConstants.SEPARATOR + "Documents" + StringConstants.SEPARATOR + "ITextSetting";
+
+    /**
+     * Main setting file path.
+     */
+    public static final String PATH_TO_SETTING_FILE = PATH_TO_SETTING_DIRECTORY + StringConstants.SEPARATOR + "Setting.bin";
+
     private StringConstants() {
 
     }

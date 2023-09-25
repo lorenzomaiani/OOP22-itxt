@@ -48,7 +48,9 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         fontChoiceBox.setOnAction(this::getFontFromChoiceBox);
         controller = new SettingControllerImpl();
-        if (SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
+        fontChoiceBox.setValue(controller.getMainFontInSetting());
+        mainDirectoryTextField.setText(controller.getMainDirectoryInSetting());
+        if (controller.getMainThemeInSetting().equals(Theme.DARK)) {
             this.darkCheckBox.setSelected(true);
             this.lightCheckBox.setSelected(false);
         } else {

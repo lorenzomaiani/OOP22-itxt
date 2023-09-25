@@ -12,11 +12,7 @@ import java.io.IOException;
  * Implementation class of Saver interface.
  */
 public final class SaverImpl implements Saver {
-    private Info info;
-    private String home = System.getProperty("user.home");
-    private static final String PATH_TO_SETTING_DIRECTORY = System.getProperty("user.home")
-            + StringConstants.SEPARATOR + "Documents" + StringConstants.SEPARATOR + "ITextSetting";
-    private static final String PATH_TO_SETTING_FILE = PATH_TO_SETTING_DIRECTORY + StringConstants.SEPARATOR + "Setting.bin";
+    private final Info info;
 
     /**
      * Constructor.
@@ -28,10 +24,10 @@ public final class SaverImpl implements Saver {
 
     @Override
     public void saveSettingOnClose() throws IOException {
-        final File settingFile = new File(PATH_TO_SETTING_FILE);
-        final File directory = new File(PATH_TO_SETTING_DIRECTORY);
-        System.out.println("Path to direcotry: " + PATH_TO_SETTING_DIRECTORY);
-        System.out.println("Path to file: " + PATH_TO_SETTING_FILE);
+        final File settingFile = new File(StringConstants.PATH_TO_SETTING_FILE);
+        final File directory = new File(StringConstants.PATH_TO_SETTING_DIRECTORY);
+        System.out.println("Path to direcotry: " + StringConstants.PATH_TO_SETTING_DIRECTORY);
+        System.out.println("Path to file: " + StringConstants.PATH_TO_SETTING_FILE);
         if (!directory.isDirectory()) { // if directory doesn't exist...
             if (directory.mkdir()) { // create a directory
                 if (!settingFile.isFile()) {  // if file doesn't exist...

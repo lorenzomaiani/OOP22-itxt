@@ -25,5 +25,23 @@ public interface SettingController {
      */
     void setAppTheme(Theme theme);
 
+    /**
+     * Get the main directory from setting.
+     * @return the directory path
+     */
+    String getMainDirectoryInSetting();
+
+    /**
+     * Get the main font from setting.
+     * @return the font name
+     */
+    String getMainFontInSetting();
+
+    /**
+     * Get the selected app theme in setting.
+     * @return the app theme
+     */
+    Theme getMainThemeInSetting();
+
 
 }

@@ -11,7 +11,7 @@ public interface Loader {
     void loadSettingInfo();
 
     /**
-     * Load file info, transformation info, from a specific file.
+     * Load file text info, transformation info, from a specific file.
      */
     void loadFileInfo();
 }

@@ -45,4 +45,9 @@ public interface SessionController {
      * Save information about text and setting when the application is closing.
      */
     void saveInfoOnClose() throws IOException;
+
+    /**
+     * Load information on start of the session.
+     */
+    void loadInfoOnOpen();
 }

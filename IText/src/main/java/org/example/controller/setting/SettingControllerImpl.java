@@ -9,11 +9,11 @@ import org.example.model.setting.Theme;
  */
 public final class SettingControllerImpl implements SettingController {
     private final Setting setting = SettingImpl.getInstance();
+
     @Override
     public void setMainDirectoryInSetting(final String mainDirectoryPath) {
         setting.setMainDirectory(mainDirectoryPath);
     }
-
     @Override
     public void setFontInSetting(final String font) {
         setting.setMainFont(font);
@@ -22,5 +22,20 @@ public final class SettingControllerImpl implements SettingController {
     @Override
     public void setAppTheme(final Theme theme) {
         setting.setAppTheme(theme);
+    }
+
+    @Override
+    public String getMainDirectoryInSetting() {
+        return setting.getMainDirectory();
+    }
+
+    @Override
+    public String getMainFontInSetting() {
+        return setting.getMainFont();
+    }
+
+    @Override
+    public Theme getMainThemeInSetting() {
+        return setting.getAppTheme();
     }
 }

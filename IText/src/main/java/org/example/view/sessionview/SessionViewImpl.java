@@ -61,6 +61,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
         controller = new SessionControllerImpl();
+        controller.loadInfoOnOpen();
         initTextAreaOnChangeMethods();
         SettingImpl.getInstance().addPropertyChangeListener(this);
         newText();
@@ -74,7 +75,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                     new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
                     Optional.of(NumericConstants.MIN_STAGE_WIDTH), Optional.of(NumericConstants.MIN_STAGE_HEIGHT));
         } catch (IOException e) {
-            System.err.print("File not found, pls enter a valid file before");
+            e.printStackTrace();
         }
     }
 

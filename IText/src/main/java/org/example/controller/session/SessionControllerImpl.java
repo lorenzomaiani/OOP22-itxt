@@ -4,13 +4,14 @@ import org.example.controller.file.OpenFileController;
 import org.example.controller.file.OpenFileControllerImpl;
 import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
+import org.example.controller.loader.Loader;
+import org.example.controller.loader.LoaderImpl;
 import org.example.controller.saver.Saver;
 import org.example.controller.saver.SaverImpl;
 import org.example.model.filemodel.FileModel;
 import org.example.model.info.Info;
 import org.example.model.info.InfoImpl;
 import org.example.model.setting.SettingImpl;
-
 import java.io.IOException;
 
 /**
@@ -20,6 +21,7 @@ public final class SessionControllerImpl implements SessionController {
 
     private SaveFileController saveFileController;
     private Saver saverController;
+    private Loader loaderController;
     private final Info info = new InfoImpl();
 
     @Override
@@ -73,4 +75,12 @@ public final class SessionControllerImpl implements SessionController {
         saverController = new SaverImpl(info);
         saverController.saveSettingOnClose();
     }
+
+    @Override
+    public void loadInfoOnOpen() {
+        info.setSetting(SettingImpl.getInstance());
+        loaderController = new LoaderImpl(info);
+        loaderController.loadSettingInfo();
+    }
+
 }
