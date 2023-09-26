@@ -31,5 +31,4 @@ public interface SessionView {
      */
     void newText();
 
-
 }

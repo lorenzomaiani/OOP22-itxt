@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.example.model.setting.SettingImpl;
+import org.example.model.setting.Theme;
 import org.example.utils.constant.NumericConstants;
+import org.example.utils.constant.StringConstants;
 import org.example.view.sessionview.SessionViewImpl;
 
 import java.util.Objects;
@@ -30,6 +33,11 @@ public final class IText extends Application {
         final Parent root = loader.load();
         final SessionViewImpl controller = loader.getController();
         Scene scene = new Scene(root);
+        if (SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(this.getClass().getResource(
+                            StringConstants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        }
         primaryStage.setMinWidth(NumericConstants.MIN_STAGE_WIDTH);
         primaryStage.setMinHeight(NumericConstants.MIN_STAGE_HEIGHT);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/itxtIcon.png"))));
@@ -38,6 +46,7 @@ public final class IText extends Application {
             event.consume();
             controller.onExit();
         });
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }

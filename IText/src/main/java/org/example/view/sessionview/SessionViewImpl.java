@@ -62,8 +62,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         sizeChoiceBox.setOnAction(this::getSizeValue);
         controller = new SessionControllerImpl();
         controller.loadInfoOnOpen();
-        initTextAreaOnChangeMethods();
         SettingImpl.getInstance().addPropertyChangeListener(this);
+        initTextAreaOnChangeMethods();
         newText();
     }
 
@@ -114,6 +114,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         infoFile.setText("Nuovo file");
         controller.restoreFileInfo();
     }
+
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
