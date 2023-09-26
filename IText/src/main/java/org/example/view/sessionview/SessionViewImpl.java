@@ -31,6 +31,7 @@ import java.util.stream.Stream;
 /**
  * Implementing the SessionView Interface.
  */
+
 public final class SessionViewImpl implements SessionView, Initializable, PropertyChangeListener {
 
     @FXML
@@ -108,13 +109,27 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     }
 
     @Override
+    public void startTextAcquisition() {
+        final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Seleziona file", borderPane.getScene().getWindow());
+        if (af != null) {
+            final String aText = controller.openFile(af.getPath(), af.getName());
+            final StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(textArea.getText());
+            textArea.clear();
+            stringBuilder.append("\n");
+            stringBuilder.append(aText);
+            textArea.setText(stringBuilder.toString());
+        }
+
+    }
+
+    @Override
     public void newText() {
         log("New Text");
-        textArea.setText("");
+        textArea.clear();
         infoFile.setText("Nuovo file");
         controller.restoreFileInfo();
     }
-
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {

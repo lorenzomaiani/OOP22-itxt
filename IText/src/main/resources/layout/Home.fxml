@@ -13,7 +13,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
 <BorderPane fx:id="borderPane" prefHeight="858.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.sessionview.SessionViewImpl">
    <top>
@@ -23,22 +25,25 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="1006.0">
                      <children>
-                        <ColorPicker fx:id="colorPicker" layoutX="14.0" layoutY="48.0" />
-                        <Label layoutX="14.0" layoutY="23.0" text="Seleziona il colore per il testo" />
-                        <Label layoutX="192.0" layoutY="26.0" text="Selezionare il font desiderato" />
-                        <Separator layoutX="176.0" layoutY="21.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Separator layoutX="367.0" layoutY="18.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Label layoutX="381.0" layoutY="25.0" text="Dimensione carattere" />
-                        <ChoiceBox fx:id="sizeChoiceBox" layoutX="381.0" layoutY="48.0" prefHeight="26.0" prefWidth="106.0" />
-                        <Separator layoutX="501.0" layoutY="20.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Button fx:id="bold" layoutX="507.0" layoutY="48.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="B" />
-                        <Button fx:id="italic" layoutX="550.0" layoutY="48.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="C" />
-                        <Button fx:id="underline" layoutX="595.0" layoutY="49.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="S" underline="true" />
-                        <Separator layoutX="658.0" layoutY="22.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
-                        <Label layoutX="514.0" layoutY="25.0" text="Stile parola" />
-                        <ChoiceBox fx:id="fontChoiceBox" layoutX="192.0" layoutY="49.0" prefHeight="26.0" prefWidth="165.0" />
-                        <Label layoutX="679.0" layoutY="25.0" text="Trova" />
-                        <TextField fx:id="findTextField" layoutX="679.0" layoutY="48.0" promptText="Trova..." />
+                        <ColorPicker fx:id="colorPicker" layoutX="156.0" layoutY="51.0">
+                           <value>
+                              <Color />
+                           </value></ColorPicker>
+                        <Label layoutX="156.0" layoutY="26.0" text="Seleziona il colore per il testo" />
+                        <Label layoutX="334.0" layoutY="29.0" text="Selezionare il font desiderato" />
+                        <Separator layoutX="318.0" layoutY="24.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Separator layoutX="509.0" layoutY="21.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Label layoutX="523.0" layoutY="28.0" text="Dimensione carattere" />
+                        <ChoiceBox fx:id="sizeChoiceBox" layoutX="523.0" layoutY="51.0" prefHeight="26.0" prefWidth="106.0" />
+                        <Separator layoutX="643.0" layoutY="23.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Button fx:id="bold" layoutX="649.0" layoutY="51.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="B" />
+                        <Button fx:id="italic" layoutX="692.0" layoutY="51.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="C" />
+                        <Button fx:id="underline" layoutX="737.0" layoutY="52.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="37.0" text="S" underline="true" />
+                        <Separator layoutX="800.0" layoutY="25.0" orientation="VERTICAL" prefHeight="56.0" prefWidth="6.0" />
+                        <Label layoutX="656.0" layoutY="28.0" text="Stile parola" />
+                        <ChoiceBox fx:id="fontChoiceBox" layoutX="334.0" layoutY="52.0" prefHeight="26.0" prefWidth="165.0" />
+                        <Label layoutX="821.0" layoutY="28.0" text="Trova" />
+                        <TextField fx:id="findTextField" layoutX="821.0" layoutY="51.0" promptText="Trova..." />
                      </children>
                   </AnchorPane>
             </content>
@@ -47,8 +52,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="1015.0">
                      <children>
-                        <Button layoutX="17.0" layoutY="68.0" mnemonicParsing="false" text="Acquisisci testo" />
-                        <ImageView fx:id="acq_imageView" fitHeight="47.0" fitWidth="56.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <Button layoutX="151.0" layoutY="75.0" mnemonicParsing="false" onAction="#startTextAcquisition" text="Acquisisci testo" />
+                        <ImageView fx:id="acq_imageView" fitHeight="47.0" fitWidth="56.0" layoutX="176.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/acq_text.png" />
                            </image>
@@ -61,14 +66,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" onAction="#startSaveDialog" text="Salva" />
-                        <Button fx:id="openButton" layoutX="74.0" layoutY="50.0" mnemonicParsing="false" onAction="#startOpenDialog" text="Apri" />
-                        <Button layoutX="125.0" layoutY="50.0" mnemonicParsing="false" onAction="#newText" text="Nuovo..." />
-                        <Button fx:id="saveButton2" layoutX="334.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadSettingStage" text="Apri impostazioni" />
-                        <Separator layoutX="222.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
-                        <Separator layoutX="456.0" layoutY="14.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
-                        <Label layoutX="22.0" layoutY="22.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />
-                        <Label layoutX="238.0" layoutY="22.0" prefHeight="17.0" prefWidth="142.0" text="Impostazioni" />
+                        <Button fx:id="saveButton" layoutX="157.0" layoutY="61.0" mnemonicParsing="false" onAction="#startSaveDialog" text="Salva" />
+                        <Button fx:id="openButton" layoutX="209.0" layoutY="61.0" mnemonicParsing="false" onAction="#startOpenDialog" text="Apri" />
+                        <Button layoutX="260.0" layoutY="61.0" mnemonicParsing="false" onAction="#newText" text="Nuovo..." />
+                        <Button fx:id="saveButton2" layoutX="469.0" layoutY="61.0" mnemonicParsing="false" onAction="#loadSettingStage" text="Apri impostazioni" />
+                        <Separator layoutX="357.0" layoutY="25.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
+                        <Separator layoutX="591.0" layoutY="25.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
+                        <Label layoutX="157.0" layoutY="33.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />
+                        <Label layoutX="373.0" layoutY="33.0" prefHeight="17.0" prefWidth="142.0" text="Impostazioni" />
                      </children>
                   </AnchorPane>
               </content>
@@ -92,4 +97,7 @@
          </top>
       </BorderPane>
    </center>
+   <bottom>
+      <HBox prefHeight="39.0" prefWidth="1125.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

@@ -27,6 +27,11 @@ public interface SessionView {
     void startOpenDialog();
 
     /**
+     * open a new file and append the text to the one already inside the file.
+     */
+    void startTextAcquisition();
+
+    /**
      * clear the current text and create a new one.
      */
     void newText();
