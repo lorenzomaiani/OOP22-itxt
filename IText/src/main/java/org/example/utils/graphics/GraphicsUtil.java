@@ -55,7 +55,7 @@ public final class GraphicsUtil {
     }
 
     /**
-     * Methods to change the application theme.
+     * Methods to change the application theme, meant to be used with observable pattern.
      * @param scene the scene that need to be change
      * @param o the root
      */
@@ -66,6 +66,20 @@ public final class GraphicsUtil {
                             StringConstants.DARK_THEME_CSS_LOCATION)).toExternalForm());
         } else {
             scene.getStylesheets().remove(
+                    Objects.requireNonNull(o.getClass().getResource(
+                            StringConstants.DARK_THEME_CSS_LOCATION)).toExternalForm());
+        }
+    }
+
+
+    /**
+     * Change a simple theme in the app, not meant to be used with observer pattern.
+     * @param scene the scene that change color
+     * @param o the object root
+     */
+    public static void changeSimpleTheme(final Scene scene, final Object o) {
+        if (SettingImpl.getInstance().getAppTheme().equals(Theme.DARK)) {
+            scene.getStylesheets().add(
                     Objects.requireNonNull(o.getClass().getResource(
                             StringConstants.DARK_THEME_CSS_LOCATION)).toExternalForm());
         }

@@ -73,7 +73,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         try {
             VisualController.chageStage("layout/Setting.fxml", "Setting",
                     new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
-                    Optional.of(NumericConstants.MIN_STAGE_WIDTH), Optional.of(NumericConstants.MIN_STAGE_HEIGHT));
+                    Optional.of(NumericConstants.MIN_STAGE_WIDTH), Optional.of(NumericConstants.MIN_STAGE_HEIGHT), this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +81,6 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     @Override
     public void startSaveDialog() {
-        isTextAlreadySaved = true;
         if (controller.isFileInfoSetted()) {
             log("Exist an opened file");
             controller.saveFile(textArea.getText(), controller.getFileInfo().getFilePath(),
@@ -95,6 +94,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                 infoFile.setText("Salvataggio in: " + sf.getName());
             }
         }
+        isTextAlreadySaved = true;
     }
 
     @Override

@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.example.utils.graphics.GraphicsUtil;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -42,15 +43,17 @@ public final class VisualController {
      * @param iconImage the icon to set to the new stage
      * @param minWidth optional param, set the minimal width of the stage
      * @param minHeigth optional param, set the minimal height of the stage
+     * @param o the root
      * @throws IOException can be call if the FXML file doesn't exist
      */
 
     public static void chageStage(final String fxmlFileName, final String stageTitle,
                                   final Image iconImage, final Optional<Double> minWidth,
-                                  final Optional<Double> minHeigth) throws IOException {
+                                  final Optional<Double> minHeigth, final Object o) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
         final Stage newStage = new Stage();
         final Scene newScene = new Scene(root);
+        GraphicsUtil.changeSimpleTheme(newScene, o);
         newStage.setScene(newScene);
         newStage.setTitle(stageTitle);
         newStage.getIcons().add(iconImage);
