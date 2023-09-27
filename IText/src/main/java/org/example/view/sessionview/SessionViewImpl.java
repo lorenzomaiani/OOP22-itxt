@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
+import org.example.model.setting.Setting;
 import org.example.model.setting.SettingImpl;
 import org.example.utils.constant.NumericConstants;
 import org.example.utils.graphics.FileChooserOption;
@@ -57,13 +58,17 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
+        final SettingImpl setting = SettingImpl.getInstance();
+        controller = new SessionControllerImpl();
+        controller.loadInfoOnOpen();
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(NumericConstants.MAX_LONG).toList());
         fontChoiceBox.setOnAction(this::getFontValue);
         sizeChoiceBox.setOnAction(this::getSizeValue);
-        controller = new SessionControllerImpl();
-        controller.loadInfoOnOpen();
-        SettingImpl.getInstance().addPropertyChangeListener(this);
+        fontChoiceBox.setValue(setting.getMainFont());
+        sizeChoiceBox.setValue(NumericConstants.DEFAULT_TEXT_SIZE);
+        setting.addPropertyChangeListener(this);
+        //SettingImpl.getInstance().addPropertyChangeListener(this);
         initTextAreaOnChangeMethods();
         newText();
     }
