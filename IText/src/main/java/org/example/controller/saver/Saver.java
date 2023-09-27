@@ -16,5 +16,5 @@ public interface Saver {
     /**
      * Save transformation text info before closing.
      */
-    void saveFileInfo();
+    void saveFileInfo() throws IOException;
 }

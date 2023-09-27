@@ -39,8 +39,14 @@ public final class SaverImpl implements Saver {
     }
 
     @Override
-    public void saveFileInfo() {
-
+    public void saveFileInfo() throws IOException {
+        final String directoryFile = info.getFileModel().getFilePath().replace(info.getFileModel().getFileName(), "");
+        System.out.println(directoryFile);
+        final File infoFile = new File(directoryFile + StringConstants.SEPARATOR + info.getFileModel().getFileName().split("\\.")[0] + "info.ini");
+        if (!infoFile.isFile()) {
+            infoFile.createNewFile();
+        }
+        writeTextInfoOnFile(infoFile);
     }
 
     /**
@@ -59,5 +65,16 @@ public final class SaverImpl implements Saver {
         } catch (IOException e) {
             System.err.println("Errore nella scrittura del file, ERR: " + e.getMessage());
         }
+    }
+
+    private void writeTextInfoOnFile(final File file){
+        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))) {
+            bfw.write(info.getFileModel().getFileName());
+            bfw.newLine();
+            bfw.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }

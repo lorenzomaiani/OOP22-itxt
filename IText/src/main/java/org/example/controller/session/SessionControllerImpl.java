@@ -74,6 +74,10 @@ public final class SessionControllerImpl implements SessionController {
         info.setSetting(SettingImpl.getInstance());
         saverController = new SaverImpl(info);
         saverController.saveSettingOnClose();
+        if (info.getFileModel() != null) {
+            saverController.saveFileInfo();
+        }
+
     }
 
     @Override
