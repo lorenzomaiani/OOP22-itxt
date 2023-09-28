@@ -7,11 +7,21 @@ public final class NumericConstants {
     /**
      * Minimum width of the stage.
      */
-    public static final double MIN_STAGE_WIDTH = 1125.0;
+    public static final double MIN_MAIN_STAGE_WIDTH = 1125.0;
     /**
      * Minimum height of the stage.
      */
-    public static final double MIN_STAGE_HEIGHT = 858.0;
+    public static final double MIN_MAIN_STAGE_HEIGHT = 858.0;
+
+    /**
+     * Minimum width of setting stage.
+     */
+    public static final double MIN_SETTING_STAGE_WIDTH = 600.0;
+
+    /**
+     * Maximum heigth od setting stage.
+     */
+    public static final double MIN_SETTING_STAGE_HEIGHT = 400.0;
 
     /**
      * Max long stream size.

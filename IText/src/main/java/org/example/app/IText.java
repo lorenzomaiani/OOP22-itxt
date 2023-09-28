@@ -32,8 +32,8 @@ public final class IText extends Application {
         final SessionViewImpl controller = loader.getController();
         Scene scene = new Scene(root);
         GraphicsUtil.changeSimpleTheme(scene, this);
-        primaryStage.setMinWidth(NumericConstants.MIN_STAGE_WIDTH);
-        primaryStage.setMinHeight(NumericConstants.MIN_STAGE_HEIGHT);
+        primaryStage.setMinWidth(NumericConstants.MIN_MAIN_STAGE_WIDTH);
+        primaryStage.setMinHeight(NumericConstants.MIN_MAIN_STAGE_HEIGHT);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(IText.class.getResourceAsStream("/icon/itxtIcon.png"))));
         primaryStage.setTitle("IText");
         primaryStage.setOnCloseRequest(event -> {

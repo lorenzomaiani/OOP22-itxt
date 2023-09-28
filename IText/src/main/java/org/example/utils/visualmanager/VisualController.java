@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.utils.graphics.GraphicsUtil;
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * Utilities class to change the context of the application, switching scene or directly the stage.
@@ -48,8 +47,8 @@ public final class VisualController {
      */
 
     public static void chageStage(final String fxmlFileName, final String stageTitle,
-                                  final Image iconImage, final Optional<Double> minWidth,
-                                  final Optional<Double> minHeigth, final Object o) throws IOException {
+                                  final Image iconImage, final double minWidth,
+                                  final double minHeigth, final Object o) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
         final Stage newStage = new Stage();
         final Scene newScene = new Scene(root);
@@ -57,8 +56,8 @@ public final class VisualController {
         newStage.setScene(newScene);
         newStage.setTitle(stageTitle);
         newStage.getIcons().add(iconImage);
-        minHeigth.ifPresent(x -> newStage.setMinWidth(minHeigth.get()));
-        minWidth.ifPresent(x -> newStage.setMinWidth(minWidth.get()));
+        newStage.setMinWidth(minHeigth);
+        newStage.setMinWidth(minWidth);
         newStage.show();
     }
 }

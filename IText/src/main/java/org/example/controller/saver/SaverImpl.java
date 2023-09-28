@@ -23,7 +23,7 @@ public final class SaverImpl implements Saver {
     }
 
     @Override
-    public void saveSettingOnClose() throws IOException {
+    public void saveSettingInfo() throws IOException {
         final File settingFile = new File(StringConstants.PATH_TO_SETTING_FILE);
         final File directory = new File(StringConstants.PATH_TO_SETTING_DIRECTORY);
         System.out.println("Path to direcotry: " + StringConstants.PATH_TO_SETTING_DIRECTORY);
@@ -39,10 +39,13 @@ public final class SaverImpl implements Saver {
     }
 
     @Override
-    public void saveFileInfo() throws IOException {
-        final String directoryFile = info.getFileModel().getFilePath().replace(info.getFileModel().getFileName(), "");
+    public void saveTextFileInfo() throws IOException {
+        final String directoryFile = info.getFileModel().getFilePath()
+                .replace(info.getFileModel().getFileName(), "");
         System.out.println(directoryFile);
-        final File infoFile = new File(directoryFile + StringConstants.SEPARATOR + info.getFileModel().getFileName().split("\\.")[0] + "info.ini");
+        final File infoFile = new File(directoryFile
+                + StringConstants.SEPARATOR
+                + info.getFileModel().getFileName().split("\\.")[0] + "info.ini");
         if (!infoFile.isFile()) {
             infoFile.createNewFile();
         }
@@ -67,12 +70,12 @@ public final class SaverImpl implements Saver {
         }
     }
 
-    private void writeTextInfoOnFile(final File file){
+    private void writeTextInfoOnFile(final File file) {
         try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))) {
             bfw.write(info.getFileModel().getFileName());
             bfw.newLine();
             bfw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

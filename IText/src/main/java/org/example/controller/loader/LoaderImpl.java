@@ -41,7 +41,16 @@ public final class LoaderImpl implements Loader {
     }
 
     @Override
-    public void loadFileInfo() {
+    public void loadTextFileInfo() {
+        final String pathToInfoFile = info.getFileModel().getFilePath().replace(info.getFileModel().getFileName(), "")
+                + info.getFileModel().getFileName().split("\\.")[0] + "info.ini";
+        System.out.println(pathToInfoFile);
+        final File infoTextFile = new File(pathToInfoFile);
+        if (infoTextFile.isFile()) {
+            final String[] res = Objects.requireNonNull(readTextInfoFromFile(infoTextFile)).split("\n");
+            info.getFileModel().setFileName(res[0]);
+        }
+
 
     }
 
@@ -59,4 +68,18 @@ public final class LoaderImpl implements Loader {
         }
     }
 
+    private String readTextInfoFromFile(final File file) {
+        try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
+            final StringBuilder stringBuilder = new StringBuilder();
+            String line = "";
+            while ((line = bfr.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append("\n");
+            }
+            return stringBuilder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

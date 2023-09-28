@@ -12,7 +12,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
-import org.example.model.setting.Setting;
 import org.example.model.setting.SettingImpl;
 import org.example.utils.constant.NumericConstants;
 import org.example.utils.graphics.FileChooserOption;
@@ -79,7 +78,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         try {
             VisualController.chageStage("layout/Setting.fxml", "Setting",
                     new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
-                    Optional.of(NumericConstants.MIN_STAGE_WIDTH), Optional.of(NumericConstants.MIN_STAGE_HEIGHT), this);
+                    NumericConstants.MIN_SETTING_STAGE_WIDTH, NumericConstants.MIN_SETTING_STAGE_HEIGHT, this);
         } catch (IOException e) {
             e.printStackTrace();
         }

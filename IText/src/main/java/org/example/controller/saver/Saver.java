@@ -10,11 +10,11 @@ public interface Saver {
     /**
      * Save setting data before closing.
      */
-    void saveSettingOnClose() throws IOException;
+    void saveSettingInfo() throws IOException;
 
 
     /**
      * Save transformation text info before closing.
      */
-    void saveFileInfo() throws IOException;
+    void saveTextFileInfo() throws IOException;
 }

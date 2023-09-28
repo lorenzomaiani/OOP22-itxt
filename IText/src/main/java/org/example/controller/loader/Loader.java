@@ -13,5 +13,5 @@ public interface Loader {
     /**
      * Load file text info, transformation info, from a specific file.
      */
-    void loadFileInfo();
+    void loadTextFileInfo();
 }

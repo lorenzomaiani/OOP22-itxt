@@ -48,6 +48,7 @@ public final class SessionControllerImpl implements SessionController {
         final OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         if (openFileController.isAnExistingFile()) {
             info.setFileModel(openFileController.getOpenedFile());
+            loaderController.loadTextFileInfo();
             return openFileController.getTextFromText();
         } else {
             return "";
@@ -73,9 +74,9 @@ public final class SessionControllerImpl implements SessionController {
     public void saveInfoOnClose() throws IOException {
         info.setSetting(SettingImpl.getInstance());
         saverController = new SaverImpl(info);
-        saverController.saveSettingOnClose();
+        saverController.saveSettingInfo();
         if (info.getFileModel() != null) {
-            saverController.saveFileInfo();
+            saverController.saveTextFileInfo();
         }
 
     }
