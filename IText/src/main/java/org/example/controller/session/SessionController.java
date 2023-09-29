@@ -47,6 +47,11 @@ public interface SessionController {
     void saveInfoOnClose() throws IOException;
 
     /**
+     * Save textFileInfo when a file is saving or closing.
+     */
+    void saveTextInfo() throws IOException;
+
+    /**
      * Load information on start of the session.
      */
     void loadInfoOnOpen();

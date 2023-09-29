@@ -35,6 +35,11 @@ public final class SessionControllerImpl implements SessionController {
                     saveFileController.createAFile();
                 }
                 info.setFileModel(saveFileController.getFileToSave());
+                try {
+                    saveTextInfo();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println(info.getFileModel().getFilePath());
                 saveFileController.saveOnFile(text);
 
@@ -57,6 +62,11 @@ public final class SessionControllerImpl implements SessionController {
 
     @Override
     public void restoreFileInfo() {
+        try {
+            saveTextInfo();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         info.setFileModel(null);
     }
 
@@ -78,7 +88,14 @@ public final class SessionControllerImpl implements SessionController {
         if (info.getFileModel() != null) {
             saverController.saveTextFileInfo();
         }
+    }
 
+    @Override
+    public void saveTextInfo() throws IOException {
+        if (info.getFileModel() != null) {
+            saverController = new SaverImpl(info);
+            saverController.saveTextFileInfo();
+        }
     }
 
     @Override
