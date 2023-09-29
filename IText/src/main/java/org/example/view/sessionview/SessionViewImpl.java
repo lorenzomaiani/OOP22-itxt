@@ -66,9 +66,14 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         sizeChoiceBox.setOnAction(this::getSizeValue);
         fontChoiceBox.setValue(setting.getMainFont());
         sizeChoiceBox.setValue(NumericConstants.DEFAULT_TEXT_SIZE);
+        fontChoiceBox.setOnAction(this::SelectedFont);
+        sizeChoiceBox.setOnAction(this::SelectedSizeFont);
         setting.addPropertyChangeListener(this);
+
         //SettingImpl.getInstance().addPropertyChangeListener(this);
         initTextAreaOnChangeMethods();
+
+
         newText();
     }
 
@@ -112,20 +117,21 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         }
     }
 
-    @Override
-    public void startTextAcquisition() {
-        final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Seleziona file", borderPane.getScene().getWindow());
-        if (af != null) {
-            final String aText = controller.openFile(af.getPath(), af.getName());
-            final StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(textArea.getText());
-            textArea.clear();
-            stringBuilder.append("\n");
-            stringBuilder.append(aText);
-            textArea.setText(stringBuilder.toString());
-        }
 
-    }
+     @Override
+    public void startTextAcquisition() {
+         final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Seleziona file", borderPane.getScene().getWindow());
+         if (af != null) {
+             final String aText = controller.openFile(af.getPath(), af.getName());
+             final StringBuilder stringBuilder = new StringBuilder();
+             stringBuilder.append(textArea.getText());
+             textArea.clear();
+             stringBuilder.append("\n");
+             stringBuilder.append(aText);
+             textArea.setText(stringBuilder.toString());
+         }
+
+     }
 
     @Override
     public void newText() {
@@ -206,4 +212,14 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
             }
         }
     }
+
+    public void SelectedFont(ActionEvent event){
+        String selectedFont = fontChoiceBox.getValue();
+        textArea.setStyle("-fx-font-family: '" + selectedFont + "';");
+    }
+    public void SelectedSizeFont(ActionEvent event){
+        int selectedSize = sizeChoiceBox.getValue();
+        textArea.setStyle("-fx-font-size: " + selectedSize + "pt;");
+    }
+
 }
