@@ -11,11 +11,12 @@ class AppTest {
             " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in" +
             " voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident," +
             " sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
     private TextLoader loader = new TextLoader();
     private TextSaver saver = new TextSaver();
 
     @Test
-    public void createAFile(){
+    public void createAndRemoveAFile(){
         assertTrue(saver.createAFile());
         assertFalse(saver.createAFile());
         assertTrue(saver.removeFile());
@@ -30,6 +31,7 @@ class AppTest {
         assertNull(loader.readFromFile());
         saver.writeOnFile(TEXT);
         assertEquals(TEXT, loader.readFromFile());
+        saver.removeFile();
     }
 
 }
