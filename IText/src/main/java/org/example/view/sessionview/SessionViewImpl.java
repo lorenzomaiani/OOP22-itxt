@@ -66,8 +66,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         sizeChoiceBox.setOnAction(this::getSizeValue);
         fontChoiceBox.setValue(setting.getMainFont());
         sizeChoiceBox.setValue(NumericConstants.DEFAULT_TEXT_SIZE);
-        fontChoiceBox.setOnAction(this::SelectedFont);
-        sizeChoiceBox.setOnAction(this::SelectedSizeFont);
+        fontChoiceBox.setOnAction(this::getSelectedFont);
+        sizeChoiceBox.setOnAction(this::getSelectedSizeFont);
         setting.addPropertyChangeListener(this);
 
         //SettingImpl.getInstance().addPropertyChangeListener(this);
@@ -120,7 +120,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
      @Override
     public void startTextAcquisition() {
-         final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Seleziona file", borderPane.getScene().getWindow());
+         final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN,
+                 "Seleziona file", borderPane.getScene().getWindow());
          if (af != null) {
              final String aText = controller.openFile(af.getPath(), af.getName());
              final StringBuilder stringBuilder = new StringBuilder();
@@ -213,11 +214,11 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         }
     }
 
-    public void SelectedFont(ActionEvent event){
+    public void getSelectedFont(final ActionEvent event) {
         String selectedFont = fontChoiceBox.getValue();
         textArea.setStyle("-fx-font-family: '" + selectedFont + "';");
     }
-    public void SelectedSizeFont(ActionEvent event){
+    public void getSelectedSizeFont(final ActionEvent event) {
         int selectedSize = sizeChoiceBox.getValue();
         textArea.setStyle("-fx-font-size: " + selectedSize + "pt;");
     }
