@@ -213,6 +213,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     }
 
     private void initGUI(final Setting setting) {
+        textArea.setWrapText(true);
         textArea.setStyle("-fx-font-family: '" + setting.getMainFont() + "';");
     }
 
