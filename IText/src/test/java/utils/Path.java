@@ -10,7 +10,7 @@ public final class Path {
     /**
      * Constructor.
      */
-    private Path(){
+    private Path() {
 
     }
 
