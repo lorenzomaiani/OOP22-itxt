@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
+import org.example.model.setting.Setting;
 import org.example.model.setting.SettingImpl;
 import org.example.utils.constant.NumericConstants;
 import org.example.utils.graphics.FileChooserOption;
@@ -69,11 +70,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         fontChoiceBox.setOnAction(this::getSelectedFont);
         sizeChoiceBox.setOnAction(this::getSelectedSizeFont);
         setting.addPropertyChangeListener(this);
-
-        //SettingImpl.getInstance().addPropertyChangeListener(this);
         initTextAreaOnChangeMethods();
-
-
+        initGUI(setting);
         newText();
     }
 
@@ -212,6 +210,10 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                 exitAlert.close();
             }
         }
+    }
+
+    private void initGUI(Setting setting){
+        textArea.setStyle("-fx-font-family: '" + setting.getMainFont() + "';");
     }
 
     public void getSelectedFont(final ActionEvent event) {
