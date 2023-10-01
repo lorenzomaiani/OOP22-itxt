@@ -8,6 +8,13 @@ import java.io.File;
 public final class Path {
 
     /**
+     * Constructor.
+     */
+    private Path(){
+
+    }
+
+    /**
      * File separator.
      */
     public static final String SEP = File.separator;
