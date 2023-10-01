@@ -7,10 +7,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Test loader from file.
+ */
+public final class TextLoader {
 
-public class TextLoader {
-
-    public String readFromFile(){
+    /**
+     * Read from a specific file.
+     * @return the message read
+     */
+    public String readFromFile() {
         String text = "";
         try (BufferedReader bfr = new BufferedReader(new FileReader(new File(Path.PATH_TO_FILE)))) {
             text = bfr.readLine();
