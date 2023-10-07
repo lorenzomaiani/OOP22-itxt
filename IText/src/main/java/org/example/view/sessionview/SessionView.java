@@ -27,6 +27,11 @@ public interface SessionView {
     void startOpenDialog();
 
     /**
+     * Open a save dialog to save the file with a name, hasn't got the control over the file open.
+     */
+    void startSaveWithName();
+
+    /**
      * open a new file and append the text to the one already inside the file.
      */
     void startTextAcquisition();

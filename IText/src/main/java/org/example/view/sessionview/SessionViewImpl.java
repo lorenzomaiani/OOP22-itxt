@@ -115,8 +115,18 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         }
     }
 
+    @Override
+    public void startSaveWithName() {
+        log("Start save with name dialog");
+        final File f = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva con nome" , borderPane.getScene().getWindow());
+        if (f != null) {
+            controller.saveFile(textArea.getText(), f.getPath(), f.getName());
+            infoFile.setText("Salvataggio in: " + f.getName());
+        }
+    }
 
-     @Override
+
+    @Override
     public void startTextAcquisition() {
          final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN,
                  "Seleziona file", borderPane.getScene().getWindow());
