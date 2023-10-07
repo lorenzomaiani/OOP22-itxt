@@ -48,6 +48,7 @@ dependencies {
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+    implementation("com.itextpdf:itextpdf:5.5.13.3")
 }
 
 tasks.withType<Test> {
