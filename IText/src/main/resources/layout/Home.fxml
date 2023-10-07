@@ -66,14 +66,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" layoutX="157.0" layoutY="61.0" mnemonicParsing="false" onAction="#startSaveDialog" text="Salva" />
-                        <Button fx:id="openButton" layoutX="209.0" layoutY="61.0" mnemonicParsing="false" onAction="#startOpenDialog" text="Apri" />
-                        <Button layoutX="260.0" layoutY="61.0" mnemonicParsing="false" onAction="#newText" text="Nuovo..." />
-                        <Button fx:id="saveButton2" layoutX="469.0" layoutY="61.0" mnemonicParsing="false" onAction="#loadSettingStage" text="Apri impostazioni" />
-                        <Separator layoutX="357.0" layoutY="25.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
-                        <Separator layoutX="591.0" layoutY="25.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
-                        <Label layoutX="157.0" layoutY="33.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />
-                        <Label layoutX="373.0" layoutY="33.0" prefHeight="17.0" prefWidth="142.0" text="Impostazioni" />
+                        <Button fx:id="saveButton" layoutX="154.0" layoutY="47.0" mnemonicParsing="false" onAction="#startSaveDialog" text="Salva" />
+                        <Button fx:id="openButton" layoutX="157.0" layoutY="76.0" mnemonicParsing="false" onAction="#startOpenDialog" text="Apri" />
+                        <Button layoutX="211.0" layoutY="76.0" mnemonicParsing="false" onAction="#newText" text="Nuovo..." />
+                        <Button fx:id="saveButton2" layoutX="444.0" layoutY="63.0" mnemonicParsing="false" onAction="#loadSettingStage" text="Apri impostazioni" />
+                        <Separator layoutX="332.0" layoutY="27.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
+                        <Separator layoutX="566.0" layoutY="27.0" orientation="VERTICAL" prefHeight="72.0" prefWidth="6.0" />
+                        <Label layoutX="157.0" layoutY="17.0" prefHeight="17.0" prefWidth="142.0" text="Operazioni File" />
+                        <Label layoutX="345.0" layoutY="19.0" prefHeight="17.0" prefWidth="142.0" text="Impostazioni" />
+                        <Button fx:id="saveWithName" layoutX="211.0" layoutY="47.0" mnemonicParsing="false" onAction="#startSaveWithName" text="Salva con nome" />
                      </children>
                   </AnchorPane>
               </content>
