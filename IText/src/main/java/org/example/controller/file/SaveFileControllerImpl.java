@@ -1,13 +1,14 @@
 package org.example.controller.file;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.example.model.filemodel.FileModel;
 import org.example.model.filemodel.FileModelImpl;
 import org.example.utils.constant.StringConstants;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * SaveFileController implementation class.
@@ -15,6 +16,7 @@ import java.io.IOException;
 public final class SaveFileControllerImpl implements SaveFileController, FileOperationController<Void, String> {
 
     private final FileModel fileToSave;
+    private SaveType saveType = SaveType.TXT;
 
 
     /**
@@ -65,17 +67,52 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
     @Override
     public Void operationOnFile(final String s) {
         if (s != null) {
-            final String[] values = s.split("\n");
-            try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath()))) {
-                for (final String value : values) {
-                    bfw.write(value);
-                    bfw.write("\n");
+            computeFileSaveType();
+            switch (saveType) {
+                case TXT -> {
+                    final String[] values = s.split("\n");
+                    try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath()))) {
+                        for (final String value : values) {
+                            bfw.write(value);
+                            bfw.write("\n");
+                        }
+                        bfw.close();
+                    } catch (IOException e) {
+                        System.err.print("Error on saving file, please retry");
+                    }
                 }
-                bfw.close();
-            } catch (IOException e) {
-                System.err.print("Error on saving file, please retry");
+                case PDF -> {
+                    Document document = new Document();
+                    try {
+                        PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getFilePath()));
+                        document.open();
+                        String[] lines = s.split("\n");
+                        for (var l : lines) {
+                            document.add(new Paragraph(l));
+                        }
+
+                        document.close();
+                    } catch (DocumentException | FileNotFoundException e) {
+                        System.err.println("Error on saving file, please retry");
+                    }
+                }
+                default -> {
+                    return null;
+                }
             }
         }
         return null;
+    }
+
+
+    /**
+     * Decide the file type by the file name.
+     */
+    private void computeFileSaveType() {
+        if (fileToSave.getFileName().contains(".txt")) {
+            this.saveType = SaveType.TXT;
+        } else if (fileToSave.getFileName().contains(".pdf")) {
+            this.saveType = SaveType.PDF;
+        }
     }
 }

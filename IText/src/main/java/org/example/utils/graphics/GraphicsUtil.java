@@ -31,9 +31,12 @@ public final class GraphicsUtil {
        switch (option) {
            case SAVE:
                FileChooser saveFileChooser = new FileChooser();
-               FileChooser.ExtensionFilter saveFilter =
+               FileChooser.ExtensionFilter saveFilterTxT =
                        new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
-               saveFileChooser.getExtensionFilters().add(saveFilter);
+               saveFileChooser.getExtensionFilters().add(saveFilterTxT);
+               FileChooser.ExtensionFilter saveFilterPdf =
+                       new FileChooser.ExtensionFilter("Pdf files (*.pdf)", "*.pdf");
+               saveFileChooser.getExtensionFilters().add(saveFilterPdf);
                if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
                    saveFileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
                }
