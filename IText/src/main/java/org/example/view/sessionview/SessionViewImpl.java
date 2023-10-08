@@ -111,6 +111,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         final File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
         if (of != null) {
             textArea.setText(controller.openFile(of.getPath(), of.getName()));
+            textArea.appendText("");
             infoFile.setText("File: " + of.getName());
         }
     }
@@ -191,6 +192,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
             public void changed(final ObservableValue<? extends String> observable,
                                 final String oldValue, final String newValue) {
                 isTextAlreadySaved = false;
+                textArea.setScrollTop(Double.MAX_VALUE);
             }
         });
     }
