@@ -72,7 +72,8 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
             switch (saveType) {
                 case TXT -> {
                     final String[] values = s.split("\n");
-                    try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath(), StandardCharsets.UTF_8))) {
+                    try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath(),
+                            StandardCharsets.UTF_8))) {
                         for (final String value : values) {
                             bfw.write(value);
                             bfw.write("\n");

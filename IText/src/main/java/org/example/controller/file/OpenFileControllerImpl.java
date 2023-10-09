@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+
 /**
  * Open Controller class, execute function to get content from text.
  */
