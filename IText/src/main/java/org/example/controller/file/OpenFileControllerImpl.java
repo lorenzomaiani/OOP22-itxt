@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Open Controller class, execute function to get content from text.
@@ -49,7 +50,7 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
     public final String operationOnFile(final Void unused) {
         String temp;
         final StringBuilder text = new StringBuilder();
-        try (BufferedReader bfr = new BufferedReader(new FileReader(this.fileToOpen.getFilePath()))) {
+        try (BufferedReader bfr = new BufferedReader(new FileReader(this.fileToOpen.getFilePath(), StandardCharsets.UTF_8))) {
             while ((temp = bfr.readLine()) != null) {
                 text.append(temp).append("\n");
             }
