@@ -31,7 +31,7 @@ public final class NumericConstants {
     /**
      * Default font size.
      */
-    public static final Integer DEFAULT_TEXT_SIZE = 14;
+    public static final Integer DEFAULT_TEXT_SIZE = 10;
 
     /**
      * Private constructor.
