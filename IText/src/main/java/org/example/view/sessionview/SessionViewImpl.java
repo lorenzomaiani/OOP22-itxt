@@ -196,13 +196,9 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     }
 
     private void initTextAreaOnChangeMethods() {
-        textArea.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(final ObservableValue<? extends String> observable,
-                                final String oldValue, final String newValue) {
-                isTextAlreadySaved = false;
-                textArea.setScrollTop(Double.MAX_VALUE);
-            }
+        textArea.textProperty().addListener(l -> {
+            isTextAlreadySaved = false;
+            textArea.setScrollTop(Double.MAX_VALUE);
         });
     }
 
