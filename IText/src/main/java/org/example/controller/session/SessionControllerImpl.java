@@ -2,6 +2,7 @@ package org.example.controller.session;
 
 import org.example.controller.file.OpenFileController;
 import org.example.controller.file.OpenFileControllerImpl;
+import org.example.controller.file.OpenType;
 import org.example.controller.file.SaveFileController;
 import org.example.controller.file.SaveFileControllerImpl;
 import org.example.controller.loader.Loader;
@@ -49,11 +50,13 @@ public final class SessionControllerImpl implements SessionController {
     }
 
     @Override
-    public String openFile(final String filePath, final String fileName) {
+    public String openFile(final String filePath, final String fileName, final OpenType openType) {
         final OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         if (openFileController.isAnExistingFile()) {
-            info.setFileModel(openFileController.getOpenedFile());
-            loaderController.loadTextFileInfo();
+            if (openType == OpenType.FILE) {
+                info.setFileModel(openFileController.getOpenedFile());
+                loaderController.loadTextFileInfo();
+            }
             return openFileController.getTextFromText();
         } else {
             return "";

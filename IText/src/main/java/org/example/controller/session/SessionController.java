@@ -1,5 +1,6 @@
 package org.example.controller.session;
 
+import org.example.controller.file.OpenType;
 import org.example.model.filemodel.FileModel;
 
 import java.io.IOException;
@@ -20,9 +21,10 @@ public interface SessionController {
      * React to the event openFile from GUI.
      * @param filePath the file path choose by the use
      * @param fileName the file name
+     * @param openType can be a file or acquisition
      * @return the text that is got from the file
      */
-    String openFile(String filePath, String fileName);
+    String openFile(String filePath, String fileName, OpenType openType);
 
     /**
      * restore information about the current opened file.

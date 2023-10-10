@@ -5,11 +5,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.example.controller.file.OpenType;
 import org.example.controller.session.SessionController;
 import org.example.controller.session.SessionControllerImpl;
 import org.example.model.setting.Setting;
@@ -90,19 +96,22 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     @Override
     public void startSaveDialog() {
         if (controller.isFileInfoSetted()) {
+            isTextAlreadySaved = true;
             log("Exist an opened file");
             controller.saveFile(textArea.getText(), controller.getFileInfo().getFilePath(),
                     controller.getFileInfo().getFileName());
             infoFile.setText("Salvataggio in: " + controller.getFileInfo().getFileName());
         } else {
+
             log("Start save dialog");
             final File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
             if (sf != null) {
+                isTextAlreadySaved = true;
                 controller.saveFile(textArea.getText(), sf.getPath(), sf.getName());
                 infoFile.setText("Salvataggio in: " + sf.getName());
             }
         }
-        isTextAlreadySaved = true;
+
     }
 
     @Override
@@ -110,7 +119,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         log("Start Open Dialog");
         final File of = GraphicsUtil.openFileChooser(FileChooserOption.OPEN, "Apri file", borderPane.getScene().getWindow());
         if (of != null) {
-            textArea.setText(controller.openFile(of.getPath(), of.getName()));
+            textArea.setText(controller.openFile(of.getPath(), of.getName(), OpenType.FILE));
             textArea.appendText("");
             infoFile.setText("File: " + of.getName());
         }
@@ -132,7 +141,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
          final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN,
                  "Seleziona file", borderPane.getScene().getWindow());
          if (af != null) {
-             final String aText = controller.openFile(af.getPath(), af.getName());
+             final String aText = controller.openFile(af.getPath(), af.getName(), OpenType.ACQUISITION); // problema!!
              final StringBuilder stringBuilder = new StringBuilder();
              stringBuilder.append(textArea.getText());
              textArea.clear();
@@ -227,6 +236,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     private void initGUI(final Setting setting) {
         textArea.setWrapText(true);
         textArea.setStyle("-fx-font-family: '" + setting.getMainFont() + "';");
+        textArea.setStyle("-fx-font-size: " + sizeChoiceBox.getValue() + "pt;");
     }
 
     public void getSelectedFont(final ActionEvent event) {
