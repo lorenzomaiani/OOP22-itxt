@@ -76,7 +76,7 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
             computeFileSaveType();
             switch (saveType) {
                 case TXT -> {
-                    final String[] values = s.split("\n");
+                    final String[] values = s.split(StringConstants.LINE_SEP);
                     try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fileToSave.getFilePath(),
                             StandardCharsets.UTF_8))) {
                         for (final String value : values) {
@@ -93,7 +93,7 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
                     try {
                         PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getFilePath()));
                         document.open();
-                        String[] lines = s.split("\n");
+                        String[] lines = s.split(StringConstants.LINE_SEP);
                         for (var l : lines) {
                             document.add(new Paragraph(l));
                         }

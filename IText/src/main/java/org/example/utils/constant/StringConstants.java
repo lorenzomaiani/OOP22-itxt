@@ -28,6 +28,11 @@ public final class StringConstants {
      */
     public static final String PATH_TO_SETTING_FILE = PATH_TO_SETTING_DIRECTORY + StringConstants.SEPARATOR + "Setting.bin";
 
+    /**
+     *
+     */
+    public static final String LINE_SEP = System.getProperty("line.separator");
+
     private StringConstants() {
 
     }

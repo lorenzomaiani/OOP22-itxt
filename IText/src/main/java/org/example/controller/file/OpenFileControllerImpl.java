@@ -2,6 +2,7 @@ package org.example.controller.file;
 
 import org.example.model.filemodel.FileModel;
 import org.example.model.filemodel.FileModelImpl;
+import org.example.utils.constant.StringConstants;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,7 +54,7 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
         final StringBuilder text = new StringBuilder();
         try (BufferedReader bfr = new BufferedReader(new FileReader(this.fileToOpen.getFilePath(), StandardCharsets.UTF_8))) {
             while ((temp = bfr.readLine()) != null) {
-                text.append(temp).append("\n");
+                text.append(temp).append(StringConstants.LINE_SEP);
             }
             return text.toString();
         } catch (IOException e) {
