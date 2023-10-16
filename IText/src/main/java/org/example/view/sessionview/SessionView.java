@@ -1,5 +1,7 @@
 package org.example.view.sessionview;
 
+import javafx.event.ActionEvent;
+
 /**
  * The handler to all the input from user.
  */
@@ -40,5 +42,17 @@ public interface SessionView {
      * clear the current text and create a new one.
      */
     void newText();
+
+    /**
+     * Get the user selected font.
+     * @param event the event from the GUI
+     */
+    void getSelectedFont(final ActionEvent event);
+
+    /**
+     * Get the size font selected by the user.
+     * @param event the event from the GUI
+     */
+    void getSelectedSizeFont(final ActionEvent event);
 
 }

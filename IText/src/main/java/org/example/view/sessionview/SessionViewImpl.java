@@ -60,6 +60,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     private boolean isTextAlreadySaved = false;
 
+    private boolean isFirst = true;
+
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         final SettingImpl setting = SettingImpl.getInstance();
@@ -153,9 +155,14 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     @Override
     public void newText() {
         log("New Text");
-        textArea.clear();
-        infoFile.setText("Nuovo file");
-        controller.restoreFileInfo();
+        if (isFirst) {
+            textArea.clear();
+            infoFile.setText("Nuovo file");
+            controller.restoreFileInfo();
+            isFirst = false;
+        } else{
+            showOnNewFileDialog();
+        }
     }
 
     @Override
@@ -227,16 +234,44 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         }
     }
 
+    private void showOnNewFileDialog() {
+        final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
+        final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
+        final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Il file e' stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?",
+                sureButton, saveButton, ButtonType.CANCEL);
+        exitAlert.setTitle("Chiudi");
+        exitAlert.setHeaderText("IL file sta per essere chiuso");
+        final Optional<ButtonType> result = exitAlert.showAndWait();
+        if (result.isPresent()) {
+            ButtonType buttonType = result.get();
+            if (buttonType.equals(sureButton)) {
+                textArea.clear();
+                infoFile.setText("Nuovo file");
+                controller.restoreFileInfo();
+            } else if (buttonType.equals(saveButton)) {
+                startSaveDialog();
+                stage = (Stage) borderPane.getScene().getWindow();
+                stage.close();
+            } else if (buttonType.equals(ButtonType.CANCEL)) {
+                exitAlert.close();
+            }
+        }
+    }
+
     private void initGUI(final Setting setting) {
         textArea.setWrapText(true);
         textArea.setStyle("-fx-font-family: '" + setting.getMainFont() + "';");
         textArea.setStyle("-fx-font-size: " + sizeChoiceBox.getValue() + "pt;");
     }
 
+    @Override
     public void getSelectedFont(final ActionEvent event) {
         String selectedFont = fontChoiceBox.getValue();
         textArea.setStyle("-fx-font-family: '" + selectedFont + "';");
     }
+
+    @Override
     public void getSelectedSizeFont(final ActionEvent event) {
         int selectedSize = sizeChoiceBox.getValue();
         textArea.setStyle("-fx-font-size: " + selectedSize + "pt;");
