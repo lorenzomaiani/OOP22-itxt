@@ -160,7 +160,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
             infoFile.setText("Nuovo file");
             controller.restoreFileInfo();
             isFirst = false;
-        } else{
+        } else {
             showOnNewFileDialog();
         }
     }

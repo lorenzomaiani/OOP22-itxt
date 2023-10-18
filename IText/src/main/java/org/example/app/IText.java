@@ -30,7 +30,7 @@ public final class IText extends Application {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/Home.fxml"));
         final Parent root = loader.load();
         final SessionViewImpl controller = loader.getController();
-        Scene scene = new Scene(root);
+        final Scene scene = new Scene(root);
         GraphicsUtil.changeSimpleTheme(scene, this);
         primaryStage.setMinWidth(NumericConstants.MIN_MAIN_STAGE_WIDTH);
         primaryStage.setMinHeight(NumericConstants.MIN_MAIN_STAGE_HEIGHT);
