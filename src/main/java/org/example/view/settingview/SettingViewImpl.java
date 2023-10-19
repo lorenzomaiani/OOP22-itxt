@@ -14,12 +14,13 @@ import org.example.model.setting.SettingImpl;
 import org.example.model.setting.Theme;
 import org.example.utils.graphics.FileChooserOption;
 import org.example.utils.graphics.GraphicsUtil;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.net.URL;;
+import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Setting view implementation, Handling input from user in the setting GUI.
@@ -100,13 +101,14 @@ public final class SettingViewImpl implements SettingView, Initializable, Proper
     }
 
     private String getFontFromChoiceBox(final ActionEvent event) {
-        log(fontChoiceBox.getValue());
+        log(fontChoiceBox.getValue() + " on " + event.toString());
         controller.setFontInSetting(fontChoiceBox.getValue());
         return fontChoiceBox.getValue();
     }
 
     private void log(final String msg) {
-        System.out.println(msg);
+        final Logger logger = Logger.getLogger(this.getClass().getName());
+        logger.log(Level.INFO, msg);
     }
 
     @Override

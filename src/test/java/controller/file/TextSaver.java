@@ -4,8 +4,12 @@ import utils.Path;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Test saving text and creating a new file.
@@ -18,12 +22,13 @@ public final class TextSaver {
      */
     public boolean createAFile() {
         try {
-            boolean result = new File(Path.PATH_TO_DIR).mkdir();
+            final boolean result = new File(Path.PATH_TO_DIR).mkdir();
             if (result) {
                 return new File(Path.PATH_TO_FILE).createNewFile();
             }
         } catch (IOException e) {
-            System.err.print("Error on creating a file, please retry");
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore - impossibile creare il file");
         }
         return false;
     }
@@ -42,11 +47,13 @@ public final class TextSaver {
      * @param mess the text that has to be written
      */
     public void writeOnFile(final String mess) {
-        try (BufferedWriter brw = new BufferedWriter(new FileWriter(new File(Path.PATH_TO_FILE)))) {
+        try (BufferedWriter brw = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(Path.PATH_TO_FILE), StandardCharsets.UTF_8.name()))) {
             brw.write(mess);
             brw.close();
         } catch (IOException e) {
-             e.printStackTrace();
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore - impossibile salvare il file");
         }
     }
 }

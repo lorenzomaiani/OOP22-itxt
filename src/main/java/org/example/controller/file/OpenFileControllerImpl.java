@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -53,12 +55,15 @@ public class OpenFileControllerImpl implements OpenFileController, FileOperation
         String temp;
         final StringBuilder text = new StringBuilder();
         try (BufferedReader bfr = new BufferedReader(new FileReader(this.fileToOpen.getFilePath(), StandardCharsets.UTF_8))) {
-            while ((temp = bfr.readLine()) != null) {
+            temp = bfr.readLine();
+            while (temp  != null) {
                 text.append(temp).append(StringConstants.LINE_SEP);
+                temp = bfr.readLine();
             }
             return text.toString();
         } catch (IOException e) {
-            System.err.print("Error on Opening a file, please retry");
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore - impossibile eseguire l'operazione");
         }
         return null;
     }

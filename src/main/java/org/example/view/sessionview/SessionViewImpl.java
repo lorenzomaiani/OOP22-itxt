@@ -27,10 +27,12 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 /**
@@ -58,7 +60,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
 
     private SessionController controller;
 
-    private boolean isTextAlreadySaved = false;
+    private boolean isTextAlreadySaved;
 
     private boolean isFirst = true;
 
@@ -66,6 +68,7 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     public void initialize(final URL location, final ResourceBundle resources) {
         final SettingImpl setting = SettingImpl.getInstance();
         controller = new SessionControllerImpl();
+        isTextAlreadySaved = false;
         controller.loadInfoOnOpen();
         fontChoiceBox.getItems().addAll(Font.getFamilies());
         sizeChoiceBox.getItems().addAll(Stream.iterate(2, (x) -> x + 2).limit(NumericConstants.MAX_LONG).toList());
@@ -73,12 +76,13 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         sizeChoiceBox.setOnAction(this::getSizeValue);
         fontChoiceBox.setValue(setting.getMainFont());
         sizeChoiceBox.setValue(NumericConstants.DEFAULT_TEXT_SIZE);
-        fontChoiceBox.setOnAction(this::getSelectedFont);
-        sizeChoiceBox.setOnAction(this::getSelectedSizeFont);
+        fontChoiceBox.setOnAction(this::selectedFont);
+        sizeChoiceBox.setOnAction(this::selectedSizeFont);
         setting.addPropertyChangeListener(this);
         initTextAreaOnChangeMethods();
         initGUI(setting);
         newText();
+
     }
 
     @Override
@@ -89,7 +93,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                     new Image(Objects.requireNonNull(SessionViewImpl.class.getResourceAsStream("/icon/setting.png"))),
                     NumericConstants.MIN_SETTING_STAGE_WIDTH, NumericConstants.MIN_SETTING_STAGE_HEIGHT, this);
         } catch (IOException e) {
-            e.printStackTrace();
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore, impossibile effettuare il caricamento dei setting");
         }
     }
 
@@ -141,12 +146,10 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
          final File af = GraphicsUtil.openFileChooser(FileChooserOption.OPEN,
                  "Seleziona file", borderPane.getScene().getWindow());
          if (af != null) {
-             final String aText = controller.openFile(af.getPath(), af.getName(), OpenType.ACQUISITION); // problema!!
+             final String aText = controller.openFile(af.getPath(), af.getName(), OpenType.ACQUISITION);
              final StringBuilder stringBuilder = new StringBuilder();
-             stringBuilder.append(textArea.getText());
+             stringBuilder.append(textArea.getText() + '\n' + aText);
              textArea.clear();
-             stringBuilder.append("\n");
-             stringBuilder.append(aText);
              textArea.setText(stringBuilder.toString());
          }
 
@@ -182,21 +185,23 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         try {
             controller.saveInfoOnClose();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.SEVERE, "Error - impossibile salvare le informazioni all'uscita");
         }
     }
 
     private void log(final String mess) {
-        System.out.println(new Date() + " " +  mess);
+        final Logger logger = Logger.getLogger(this.getClass().getName());
+        logger.log(Level.INFO, mess);
     }
 
     private String getFontValue(final ActionEvent event) {
-        log(fontChoiceBox.getValue());
+        log(fontChoiceBox.getValue() + " on " + event.toString());
         return fontChoiceBox.getValue();
     }
 
     private int getSizeValue(final ActionEvent event) {
-        log(sizeChoiceBox.getValue().toString());
+        log(sizeChoiceBox.getValue().toString() + " on " + event.toString());
         return sizeChoiceBox.getValue();
     }
 
@@ -210,14 +215,16 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     private void showExitDialog() {
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
         final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
+        final String contextTxt = new String("L'app sta per chiudersi, sei sicuro di voler uscire senza salvare?".getBytes(),
+                StandardCharsets.UTF_8);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Il file e' stato modificato e non salvato, sei sicuro di voler uscire senza salvare?",
+                contextTxt,
                 sureButton, saveButton, ButtonType.CANCEL);
         exitAlert.setTitle("Esci");
         exitAlert.setHeaderText("L'app sta per chiudersi");
         final Optional<ButtonType> result = exitAlert.showAndWait();
         if (result.isPresent()) {
-            ButtonType buttonType = result.get();
+            final ButtonType buttonType = result.get();
             if (buttonType.equals(sureButton)) {
                 log("Exit without saving");
                 stage = (Stage) borderPane.getScene().getWindow();
@@ -237,14 +244,17 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     private void showOnNewFileDialog() {
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
         final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
+        final String contextTxt = new String(
+                "Il file é stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?".getBytes(),
+                StandardCharsets.UTF_8);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Il file e' stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?",
+                contextTxt,
                 sureButton, saveButton, ButtonType.CANCEL);
         exitAlert.setTitle("Chiudi");
-        exitAlert.setHeaderText("IL file sta per essere chiuso");
+        exitAlert.setHeaderText("Il file sta per essere chiuso");
         final Optional<ButtonType> result = exitAlert.showAndWait();
         if (result.isPresent()) {
-            ButtonType buttonType = result.get();
+            final ButtonType buttonType = result.get();
             if (buttonType.equals(sureButton)) {
                 textArea.clear();
                 infoFile.setText("Nuovo file");
@@ -266,14 +276,14 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     }
 
     @Override
-    public void getSelectedFont(final ActionEvent event) {
-        String selectedFont = fontChoiceBox.getValue();
+    public void selectedFont(final ActionEvent event) {
+        final String selectedFont = fontChoiceBox.getValue();
         textArea.setStyle("-fx-font-family: '" + selectedFont + "';");
     }
 
     @Override
-    public void getSelectedSizeFont(final ActionEvent event) {
-        int selectedSize = sizeChoiceBox.getValue();
+    public void selectedSizeFont(final ActionEvent event) {
+        final int selectedSize = sizeChoiceBox.getValue();
         textArea.setStyle("-fx-font-size: " + selectedSize + "pt;");
     }
 

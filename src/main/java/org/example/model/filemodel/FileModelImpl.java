@@ -22,7 +22,6 @@ public final class FileModelImpl implements FileModel {
         this.creationDate = new Date();
     }
 
-
     @Override
     public void setFilePath(final String path) {
         this.path = path;

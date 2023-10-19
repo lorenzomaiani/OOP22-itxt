@@ -5,8 +5,12 @@ import org.example.utils.constant.StringConstants;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implementation class of Saver interface.
@@ -26,14 +30,11 @@ public final class SaverImpl implements Saver {
     public void saveSettingInfo() throws IOException {
         final File settingFile = new File(StringConstants.PATH_TO_SETTING_FILE);
         final File directory = new File(StringConstants.PATH_TO_SETTING_DIRECTORY);
-        System.out.println("Path to direcotry: " + StringConstants.PATH_TO_SETTING_DIRECTORY);
-        System.out.println("Path to file: " + StringConstants.PATH_TO_SETTING_FILE);
-        if (!directory.isDirectory()) { // if directory doesn't exist...
-            if (directory.mkdir()) { // create a directory
-                if (!settingFile.isFile()) {  // if file doesn't exist...
-                    settingFile.createNewFile();  // create a file
-                }
-            }
+        final Logger logger = Logger.getLogger(this.getClass().getName());
+        logger.log(Level.INFO, "Path to direcotry: " + StringConstants.PATH_TO_SETTING_DIRECTORY
+                + " Path to file: " + StringConstants.PATH_TO_SETTING_FILE);
+        if (!directory.isDirectory() && directory.mkdir() && !settingFile.isFile()) {
+            settingFile.createNewFile();  // create a file
         }
         writeSettingOnFile(settingFile);
     }
@@ -42,7 +43,8 @@ public final class SaverImpl implements Saver {
     public void saveTextFileInfo() throws IOException {
         final String directoryFile = info.getFileModel().getFilePath()
                 .replace(info.getFileModel().getFileName(), "");
-        System.out.println(directoryFile);
+        final Logger logger = Logger.getLogger(this.getClass().getName());
+        logger.log(Level.INFO, directoryFile);
         final File infoFile = new File(directoryFile
                 + StringConstants.SEPARATOR
                 + info.getFileModel().getFileName().split("\\.")[0] + "info.ini");
@@ -57,7 +59,8 @@ public final class SaverImpl implements Saver {
      * @param file
      */
     private void writeSettingOnFile(final File file) {
-        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bfw = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(file), StandardCharsets.UTF_8))) {
             bfw.write(info.getSetting().getMainDirectory());
             bfw.newLine();
             bfw.write(info.getSetting().getMainFont());
@@ -66,17 +69,21 @@ public final class SaverImpl implements Saver {
             bfw.newLine();
             bfw.close();
         } catch (IOException e) {
-            System.err.println("Errore nella scrittura del file, ERR: " + e.getMessage());
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore nella scrittura del file, ERR: " + e.getMessage());
+
         }
     }
 
     private void writeTextInfoOnFile(final File file) {
-        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bfw = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(file), StandardCharsets.UTF_8))) {
             bfw.write(info.getFileModel().getFileName());
             bfw.newLine();
             bfw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore nella scrittura del file, ERR: " + e.getMessage());
         }
 
     }

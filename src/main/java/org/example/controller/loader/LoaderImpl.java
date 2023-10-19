@@ -6,15 +6,19 @@ import org.example.utils.constant.StringConstants;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Loader implementation.
  */
 public final class LoaderImpl implements Loader {
-    private Info info;
+    private final Info info;
 
     /**
      * Constructor.
@@ -29,10 +33,11 @@ public final class LoaderImpl implements Loader {
     public void loadSettingInfo() {
         final File settingFile = new File(StringConstants.PATH_TO_SETTING_FILE);
         if (settingFile.isFile()) {  // app have been open at least one time
-            String[] res = Objects.requireNonNull(readSettingFromFile(settingFile)).split("\n");
+            final String[] res = Objects.requireNonNull(readSettingFromFile(settingFile)).split("\n");
             info.getSetting().setMainDirectory(res[0]);
             info.getSetting().setMainFont(res[1]);
-            if (res[2].equals("LIGHT")) {
+            final String themeString = res[2];
+            if ("LIGHT".equals(themeString)) {
                 info.getSetting().setAppTheme(Theme.LIGHT);
             } else {
                 info.getSetting().setAppTheme(Theme.DARK);
@@ -44,7 +49,6 @@ public final class LoaderImpl implements Loader {
     public void loadTextFileInfo() {
         final String pathToInfoFile = info.getFileModel().getFilePath().replace(info.getFileModel().getFileName(), "")
                 + info.getFileModel().getFileName().split("\\.")[0] + "info.ini";
-        System.out.println(pathToInfoFile);
         final File infoTextFile = new File(pathToInfoFile);
         if (infoTextFile.isFile()) {
             final String[] res = Objects.requireNonNull(readTextInfoFromFile(infoTextFile)).split("\n");
@@ -56,29 +60,37 @@ public final class LoaderImpl implements Loader {
 
     private String readSettingFromFile(final File file) {
         final StringBuilder res = new StringBuilder();
-        String line = "";
-        try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
-            while ((line = bfr.readLine()) != null) {
-                res.append(line).append("\n");
+        String line;
+        try (BufferedReader bfr = new BufferedReader(new InputStreamReader(
+                new FileInputStream(file), StandardCharsets.UTF_8))) {
+            line = bfr.readLine();
+            while (line != null) {
+                res.append(line).append('\n');
+                line = bfr.readLine();
             }
             return res.toString();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore - impossibile eseguire l'operazione");
             return null;
         }
     }
 
     private String readTextInfoFromFile(final File file) {
-        try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
-            final StringBuilder stringBuilder = new StringBuilder();
-            String line = "";
-            while ((line = bfr.readLine()) != null) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        try (BufferedReader bfr = new BufferedReader(new InputStreamReader(
+                new FileInputStream(file), StandardCharsets.UTF_8))) {
+            line = bfr.readLine();
+            while (line  != null) {
                 stringBuilder.append(line);
-                stringBuilder.append("\n");
+                stringBuilder.append('\n');
+                line = bfr.readLine();
             }
             return stringBuilder.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Errore - impossibile eseguire l'operazione");
             return null;
         }
     }

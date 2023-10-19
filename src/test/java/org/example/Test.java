@@ -1,8 +1,8 @@
+package org.example;
 
 import controller.file.TextLoader;
 import controller.file.TextSaver;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,11 +17,11 @@ class AppTest {
             + " voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,"
             + " sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-    private TextLoader loader = new TextLoader();
-    private TextSaver saver = new TextSaver();
+    private final TextLoader loader = new TextLoader();
+    private final TextSaver saver = new TextSaver();
 
     @Test
-    public void createAndRemoveAFile() {
+    void createAndRemoveAFile() {
         assertTrue(saver.createAFile());
         assertFalse(saver.createAFile());
         assertTrue(saver.removeFile());
@@ -31,7 +31,7 @@ class AppTest {
     }
 
     @Test
-    public void readFromFile() {
+    void readFromFile() {
         saver.createAFile();
         assertNull(loader.readFromFile());
         saver.writeOnFile(TEXT);

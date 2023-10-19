@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * SaveFileController implementation class.
@@ -41,7 +43,7 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
                         fileToSave.getFileName(), "");
                 final String directoryName = fileToSave.getFileName().split("\\.")[0];
 
-                boolean result = new File(pathWithoutFileName + fileToSave.getFileName().split("\\.")[0]).mkdir();
+                final boolean result = new File(pathWithoutFileName + fileToSave.getFileName().split("\\.")[0]).mkdir();
                 if (result) {
                     fileToSave.setFilePath(pathWithoutFileName + directoryName
                             + StringConstants.SEPARATOR + fileToSave.getFileName()); // reset the previous selected path to saving
@@ -49,7 +51,8 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
                             + StringConstants.SEPARATOR + fileToSave.getFileName()).createNewFile();
                 }
             } catch (IOException e) {
-                System.err.print("Error on creating a file, please retry");
+                final Logger logger = Logger.getLogger(this.getClass().getName());
+                logger.log(Level.WARNING, "Errore - impossibile creare il file");
             }
         return false;
     }
@@ -85,22 +88,24 @@ public final class SaveFileControllerImpl implements SaveFileController, FileOpe
                         }
                         bfw.close();
                     } catch (IOException e) {
-                        System.err.print("Error on saving file, please retry");
+                        final Logger logger = Logger.getLogger(this.getClass().getName());
+                        logger.log(Level.WARNING, "Errore - impossibile eseguire l'operazione");
                     }
                 }
                 case PDF -> {
-                    Document document = new Document();
+                    final Document document = new Document();
                     try {
                         PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getFilePath()));
                         document.open();
-                        String[] lines = s.split(StringConstants.LINE_SEP);
-                        for (var l : lines) {
+                        final String[] lines = s.split(StringConstants.LINE_SEP);
+                        for (final var l : lines) {
                             document.add(new Paragraph(l));
                         }
 
                         document.close();
                     } catch (DocumentException | FileNotFoundException e) {
-                        System.err.println("Error on saving file, please retry");
+                        final Logger logger = Logger.getLogger(this.getClass().getName());
+                        logger.log(Level.WARNING, "Errore - impossibile eseguire l'operazione");
                     }
                 }
                 default -> {

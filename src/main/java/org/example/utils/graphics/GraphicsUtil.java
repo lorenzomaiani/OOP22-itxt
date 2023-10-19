@@ -30,23 +30,23 @@ public final class GraphicsUtil {
     public static File openFileChooser(final FileChooserOption option, final String title, final Window window) {
        switch (option) {
            case SAVE:
-               FileChooser saveFileChooser = new FileChooser();
-               FileChooser.ExtensionFilter saveFilterTxT =
+               final FileChooser saveFileChooser = new FileChooser();
+               final FileChooser.ExtensionFilter saveFilterTxT =
                        new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
                saveFileChooser.getExtensionFilters().add(saveFilterTxT);
-               FileChooser.ExtensionFilter saveFilterPdf =
+               final FileChooser.ExtensionFilter saveFilterPdf =
                        new FileChooser.ExtensionFilter("Pdf files (*.pdf)", "*.pdf");
                saveFileChooser.getExtensionFilters().add(saveFilterPdf);
-               if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
+               if (!"".equals(SettingImpl.getInstance().getMainDirectory())) {
                    saveFileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
                }
                return saveFileChooser.showSaveDialog(window);
            case OPEN:
-               FileChooser openFileChooser = new FileChooser();
-               FileChooser.ExtensionFilter openFilter =
+               final FileChooser openFileChooser = new FileChooser();
+               final FileChooser.ExtensionFilter openFilter =
                        new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
                openFileChooser.getExtensionFilters().add(openFilter);
-               if (!SettingImpl.getInstance().getMainDirectory().equals("")) {
+               if (!"".equals(SettingImpl.getInstance().getMainDirectory())) {
                    openFileChooser.setInitialDirectory(new File(SettingImpl.getInstance().getMainDirectory()));
                }
                return openFileChooser.showOpenDialog(window);

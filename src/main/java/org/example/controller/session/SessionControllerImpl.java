@@ -14,6 +14,8 @@ import org.example.model.info.Info;
 import org.example.model.info.InfoImpl;
 import org.example.model.setting.SettingImpl;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the SessionController.
@@ -39,9 +41,11 @@ public final class SessionControllerImpl implements SessionController {
                 try {
                     saveTextInfo();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    final Logger logger = Logger.getLogger(this.getClass().getName());
+                    logger.log(Level.WARNING, "Exception :" + e.getMessage());
                 }
-                System.out.println(info.getFileModel().getFilePath());
+                final Logger logger = Logger.getLogger(this.getClass().getName());
+                logger.log(Level.INFO, info.getFileModel().getFilePath());
                 saveFileController.saveOnFile(text);
 
             }
@@ -68,7 +72,8 @@ public final class SessionControllerImpl implements SessionController {
         try {
             saveTextInfo();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Exception :" + e.getMessage());
         }
         info.setFileModel(null);
     }
@@ -106,6 +111,7 @@ public final class SessionControllerImpl implements SessionController {
         info.setSetting(SettingImpl.getInstance());
         loaderController = new LoaderImpl(info);
         loaderController.loadSettingInfo();
+
     }
 
 }

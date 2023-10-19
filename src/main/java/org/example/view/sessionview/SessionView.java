@@ -47,12 +47,12 @@ public interface SessionView {
      * Get the user selected font.
      * @param event the event from the GUI
      */
-    void getSelectedFont(ActionEvent event);
+    void selectedFont(ActionEvent event);
 
     /**
      * Get the size font selected by the user.
      * @param event the event from the GUI
      */
-    void getSelectedSizeFont(ActionEvent event);
+    void selectedSizeFont(ActionEvent event);
 
 }
