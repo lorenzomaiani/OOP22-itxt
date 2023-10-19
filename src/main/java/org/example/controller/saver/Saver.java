@@ -12,7 +12,6 @@ public interface Saver {
      */
     void saveSettingInfo() throws IOException;
 
-
     /**
      * Save transformation text info before closing.
      */

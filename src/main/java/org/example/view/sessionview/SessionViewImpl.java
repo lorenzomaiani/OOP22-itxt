@@ -261,8 +261,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                 controller.restoreFileInfo();
             } else if (buttonType.equals(saveButton)) {
                 startSaveDialog();
-                stage = (Stage) borderPane.getScene().getWindow();
-                stage.close();
+                textArea.clear();
+                controller.restoreFileInfo();
             } else if (buttonType.equals(ButtonType.CANCEL)) {
                 exitAlert.close();
             }

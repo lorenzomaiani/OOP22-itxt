@@ -28,6 +28,7 @@ public final class SessionControllerImpl implements SessionController {
     private final Info info = new InfoImpl();
 
     @Override
+    @SuppressWarnings("Not need to be initialize saveController here, is inside the method")
     public void saveFile(final String text, final String filePath, final String fileName) {
         saveFileController = new SaveFileControllerImpl(filePath, fileName);
         new Thread() {
@@ -54,6 +55,7 @@ public final class SessionControllerImpl implements SessionController {
     }
 
     @Override
+    @SuppressWarnings("Not need to be initialize loadController here, is inside the method")
     public String openFile(final String filePath, final String fileName, final OpenType openType) {
         final OpenFileController openFileController = new OpenFileControllerImpl(filePath, fileName);
         if (openFileController.isAnExistingFile()) {

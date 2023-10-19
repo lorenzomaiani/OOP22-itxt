@@ -54,8 +54,6 @@ public final class LoaderImpl implements Loader {
             final String[] res = Objects.requireNonNull(readTextInfoFromFile(infoTextFile)).split("\n");
             info.getFileModel().setFileName(res[0]);
         }
-
-
     }
 
     private String readSettingFromFile(final File file) {
