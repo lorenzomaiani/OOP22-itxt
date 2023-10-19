@@ -9,7 +9,8 @@ import java.util.Objects;
 public final class FileModelImpl implements FileModel {
     private String path;
     private String name;
-    private final Date creationDate;
+    @SuppressWarnings("PMD")
+    private Date creationDate;
 
     /**
      * Constructor.
@@ -21,7 +22,6 @@ public final class FileModelImpl implements FileModel {
         this.name = name;
         this.creationDate = new Date();
     }
-
     @Override
     public void setFilePath(final String path) {
         this.path = path;
@@ -40,11 +40,6 @@ public final class FileModelImpl implements FileModel {
     @Override
     public String getFileName() {
         return this.name;
-    }
-
-    @Override
-    public Date getFileCreationDate() {
-        return this.creationDate;
     }
 
     @Override

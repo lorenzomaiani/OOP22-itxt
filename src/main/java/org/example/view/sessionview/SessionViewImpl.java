@@ -107,7 +107,6 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
                     controller.getFileInfo().getFileName());
             infoFile.setText("Salvataggio in: " + controller.getFileInfo().getFileName());
         } else {
-
             log("Start save dialog");
             final File sf = GraphicsUtil.openFileChooser(FileChooserOption.SAVE, "Salva file", borderPane.getScene().getWindow());
             if (sf != null) {
@@ -257,9 +256,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
         final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
         final String contextTxt = new String(
-                "Il file é stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?"
-                        .getBytes(StandardCharsets.UTF_8),
-                StandardCharsets.UTF_8);
+                "Il file sta per chiudersi e non risulta salvato, sei sicuro di voler chiudere il file corrente?"
+                        .getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
                 contextTxt,
                 sureButton, saveButton, ButtonType.CANCEL);

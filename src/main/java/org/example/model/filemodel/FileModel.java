@@ -1,6 +1,6 @@
 package org.example.model.filemodel;
 
-import java.util.Date;
+
 
 /**
  * Model of a file that can be saved and opened.
@@ -30,12 +30,4 @@ public interface FileModel {
      * @return the name
      */
     String getFileName();
-
-    /**
-     * get the creation date of the file.
-     * @return the creation date
-     */
-    Date getFileCreationDate();
-
-
 }
