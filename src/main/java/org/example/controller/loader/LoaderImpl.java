@@ -52,7 +52,7 @@ public final class LoaderImpl implements Loader {
         final File infoTextFile = new File(pathToInfoFile);
         if (infoTextFile.isFile()) {
             final String[] res = Objects.requireNonNull(readTextInfoFromFile(infoTextFile)).split("\n");
-            if (!res[0].isEmpty()){
+            if (!res[0].isEmpty()) {
                 info.getFileModel().setFileName(res[0]);
             }
 
