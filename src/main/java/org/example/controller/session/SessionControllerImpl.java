@@ -39,19 +39,18 @@ public final class SessionControllerImpl implements SessionController {
                     saveFileController.createAFile();
                 }
                 info.setFileModel(saveFileController.getFileToSave());
-                try {
-                    saveTextInfo();
-                } catch (IOException e) {
-                    final Logger logger = Logger.getLogger(this.getClass().getName());
-                    logger.log(Level.WARNING, "Exception :" + e.getMessage());
-                }
+
                 final Logger logger = Logger.getLogger(this.getClass().getName());
                 logger.log(Level.INFO, info.getFileModel().getFilePath());
                 saveFileController.saveOnFile(text);
-
             }
         }.start();
-
+        try {
+            saveTextInfo();
+        } catch (IOException e) {
+            final Logger logger = Logger.getLogger(this.getClass().getName());
+            logger.log(Level.WARNING, "Exception :" + e.getMessage());
+        }
     }
 
     @Override
