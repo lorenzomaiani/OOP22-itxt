@@ -34,7 +34,10 @@ public final class SaverImpl implements Saver {
         logger.log(Level.INFO, "Path to direcotry: " + StringConstants.PATH_TO_SETTING_DIRECTORY
                 + " Path to file: " + StringConstants.PATH_TO_SETTING_FILE);
         if (!directory.isDirectory() && directory.mkdir() && !settingFile.isFile()) {
-            settingFile.createNewFile();  // create a file
+            final boolean res = settingFile.createNewFile();  // create a file
+            if (!res) {
+                logger.log(Level.WARNING, "ERROR");
+            }
         }
         writeSettingOnFile(settingFile);
     }
@@ -49,7 +52,10 @@ public final class SaverImpl implements Saver {
                 + StringConstants.SEPARATOR
                 + info.getFileModel().getFileName().split("\\.")[0] + "info.ini");
         if (!infoFile.isFile()) {
-            infoFile.createNewFile();
+           final boolean res = infoFile.createNewFile();
+            if (!res) {
+                logger.log(Level.WARNING, "ERROR");
+            }
         }
         writeTextInfoOnFile(infoFile);
     }

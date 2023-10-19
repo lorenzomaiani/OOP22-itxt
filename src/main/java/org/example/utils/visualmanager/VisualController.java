@@ -1,8 +1,6 @@
 package org.example.utils.visualmanager;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -28,12 +26,12 @@ public final class VisualController {
      * @param event event passed from an interration wiht a button
      * @throws Exception can be call if the FXML file doesn't exist
      */
-    public static void changeScene(final String fxmlFileName, final ActionEvent event) throws IOException {
+    /*public static void changeScene(final String fxmlFileName, final ActionEvent event) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFileName));
         final Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         final Scene scene = new Scene(root);
         stage.setScene(scene);
-    }
+    }*/
 
     /**
      * static method to load a new stage above another.

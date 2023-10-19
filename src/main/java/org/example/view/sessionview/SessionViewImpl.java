@@ -179,8 +179,13 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         if (!isTextAlreadySaved) {
             showExitDialog();
         } else {
-            stage = (Stage) borderPane.getScene().getWindow();
-            stage.close();
+            try {
+                stage = (Stage) borderPane.getScene().getWindow();
+                stage.close();
+            } catch (ClassCastException e) {
+                final Logger logger = Logger.getLogger(this.getClass().getName());
+                logger.log(Level.WARNING, "Error - impossibile trovare la window corrente");
+            }
         }
         try {
             controller.saveInfoOnClose();
@@ -215,7 +220,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
     private void showExitDialog() {
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
         final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
-        final String contextTxt = new String("L'app sta per chiudersi, sei sicuro di voler uscire senza salvare?".getBytes(),
+        final String contextTxt = new String(
+                "L'app sta per chiudersi, sei sicuro di voler uscire senza salvare?".getBytes(StandardCharsets.UTF_8),
                 StandardCharsets.UTF_8);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
                 contextTxt,
@@ -227,8 +233,14 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
             final ButtonType buttonType = result.get();
             if (buttonType.equals(sureButton)) {
                 log("Exit without saving");
-                stage = (Stage) borderPane.getScene().getWindow();
-                stage.close();
+                try {
+                    stage = (Stage) borderPane.getScene().getWindow();
+                    stage.close();
+                } catch (ClassCastException e) {
+                    final Logger logger = Logger.getLogger(this.getClass().getName());
+                    logger.log(Level.WARNING, "Error - impossibile trovare la window corrente");
+                }
+
             } else if (buttonType.equals(saveButton)) {
                 log("Save");
                 startSaveDialog();
@@ -245,7 +257,8 @@ public final class SessionViewImpl implements SessionView, Initializable, Proper
         final ButtonType sureButton = new ButtonType("Sono sicuro", ButtonBar.ButtonData.YES);
         final ButtonType saveButton = new ButtonType("Salva", ButtonBar.ButtonData.NO);
         final String contextTxt = new String(
-                "Il file é stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?".getBytes(),
+                "Il file é stato modificato e non salvato, sei sicuro di voler chiudere il file corrente?"
+                        .getBytes(StandardCharsets.UTF_8),
                 StandardCharsets.UTF_8);
         final Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION,
                 contextTxt,
